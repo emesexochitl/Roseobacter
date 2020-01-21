@@ -1,4 +1,4 @@
-# Roseobacter
+# Hausfrau merger README
 ## Merge data tables easily!
 Welcome to the Hausfrau merger! This program was created to merge and concatenate slightly or more dissimar data tables for further processing.
 
