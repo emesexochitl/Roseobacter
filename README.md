@@ -24,10 +24,13 @@ import math
 * it is able to substitute missing values with zeros,
 * it is specialized to Oceanic metadata, therefore growth rate calculation based on bacterial generation time is possible,
 * at the merging step, it will detect possibly identical columns and ask you if you would still rename and use them in the merge,
-- and finally, it will merge your tables into one final CSV output, based on the columns represented in all your tables.
+* and finally, it will merge your tables into one final CSV output, based on the columns represented in all your tables,
+* you can choose the name of the output file.
 ## Limitations:
  * It cannot handle different table structures. Headers should have the same structure as well,
  * To reduce resetting, it is recommended to have identical headers in every table,
  * It can be problematic to merge and manually set the parameters for hundreds of tables, or really noisiy ones. It is recommended to do the merge with subsets, then merge them together,
  * Unique columns with no common match in all input tables will be dropped at the end step
  * It takes what it gets. For instance, when a CSV table is exported from Libreoffice, digits can be lost. Before running this merger, make sure you exported your tables right!
+ ## How to use:
+ The merges operates on an interactive way. First it asks for your files one by one. Next it will ask for defining your headers, then checks the tables one by one for dupicated and unnecessary rows and offers optimal editing. At the end all matching columns will be concatenated to a final table
