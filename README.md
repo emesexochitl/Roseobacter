@@ -30,4 +30,4 @@ import math
  * To reduce resetting, it is recommended to have identical headers in every table,
  * It can be problematic to merge and manually set the parameters for hundreds of tables, or really noisiy ones. It is recommended to do the merge with subsets, then merge them together,
  * Unique columns with no common match in all input tables will be dropped at the end step
- * It takes what it gets. For instance, when a CSV table is exported, digits can be lost. Before running this merger, make sure you exported your tables right!
+ * It takes what it gets. For instance, when a CSV table is exported from Libreoffice, digits can be lost. Before running this merger, make sure you exported your tables right!
