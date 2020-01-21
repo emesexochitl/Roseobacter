@@ -1,6 +1,6 @@
 # Roseobacter
 ## Merge data tables easily!
-Welcome to the Hausfrau merger. This program was created to merge and concatenate slightly or more dissimar data tables for further processing.
+Welcome to the Hausfrau merger! This program was created to merge and concatenate slightly or more dissimar data tables for further processing.
 
 ## Dependencies:
 The merger depends on the following Python packages:
@@ -33,4 +33,5 @@ import math
  * Unique columns with no common match in all input tables will be dropped at the end step
  * It takes what it gets. For instance, when a CSV table is exported from Libreoffice, digits can be lost. Before running this merger, make sure you exported your tables right!
  ## How to use:
- The merges operates on an interactive way. First it asks for your files one by one. Next it will ask for defining your headers, then checks the tables one by one for dupicated and unnecessary rows and offers optimal editing. At the end all matching columns will be concatenated to a final table
+ The merger operates on an interactive way. First it asks for your files one by one. Next it will ask for defining your headers, then checks the tables one by one for dupicated and unnecessary rows and offers optional editing. At the end all matching columns will be concatenated to a final table.
+If you are not sure how to use it, please check the testrun.txt file!
