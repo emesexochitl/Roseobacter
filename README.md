@@ -4,7 +4,7 @@ Welcome to the Hausfrau merger! This program was created to merge and concatenat
 
 ## Dependencies:
 The merger depends on the following Python packages:
-import math
+* math
 * scipy
 * numpy
 * pandas
