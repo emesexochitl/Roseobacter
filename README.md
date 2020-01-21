@@ -22,7 +22,7 @@ import math
 * detects and based on your wish, drops unnecessary duplicated columns,
 * additionally, optional column dropping per table is possible too,
 * it is able to substitute missing values with zeros,
-* it is specialized to Oceanic metadata,therefore growth rate calculation based on bacterial generation time is possible,
+* it is specialized to Oceanic metadata, therefore growth rate calculation based on bacterial generation time is possible,
 * at the merging step, it will detect possibly identical columns and ask you if you would still rename and use them in the merge,
 - and finally, it will merge your tables into one final CSV output, based on the columns represented in all your tables.
 ## Limitations:
