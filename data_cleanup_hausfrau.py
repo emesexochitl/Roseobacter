@@ -239,3 +239,4 @@ except:
 
 mergetable.to_csv(output, index=False, header= True)
 #df.types
+print "\nGut gemacht!""
