@@ -1,0 +1,1389 @@
+emese@texas:~/Desktop/Roseobacter/Meinhard_data$ python data_cleanup.py
+2020-01-21 15:44:54.608823
+Welcome to the Hausfrau merger. This program will help you to clean and concatenate your data tables! Before we start, please consider the following points: 
+
+What can this merger do? 
+ - it loads your CSV tables one by one,
+ - keeps your column names, even with special characters,
+ - checks column formatting,
+ - deletes empty rows and columns,
+ - deletes non-numeric and non-alphabetical characters,
+ - detects and based on your wish, drops unnecessary duplicated columns,
+ - additionally, optimal column dropping per table is possible too,
+ - at the merging step, it will detect possibly identical columns and ask you if you would still rename and use them in the merge,
+ - and finally, it will merge your tables into one final CSV output, based on the columns represented in all your tables
+
+ What cannot this merger do?
+  - It cannot handle different table structures. Headers should have the same structure as well,
+  - To reduce resetting, it is recommended to have idenential headers in every table,
+  - It can be problematic to merge and manually set the parameters for hundreds of tables. It is recommended to do the merge with subsets, then merge them together 
+
+If you feel like you made a mistake, no worries! Just break out by hitting ctrl + c!
+
+Let's begin!
+Please type your input files. Once you are done, hit Enter again!
+dummy1.csv
+dummy2.csv
+dummy3.csv
+
+['dummy1.csv', 'dummy2.csv', 'dummy3.csv']
+Please define the headers of your file. For instance, when your header is only the first row, your start coordinate is 0 and your end coordinate is 1.
+The first 2 rows of headers would be 0 and 2 , the first 3 rows of headers would be 0 and 3  and so forth...
+Your header starts at: 0
+Your header ends at: 3
+data_cleanup.py:35: FutureWarning: supplying multiple axes to axis is deprecated and will be removed in a future version.
+  self.loadlist = self.loadlist.dropna(how="all", axis=[0,1])
+data_cleanup.py:37: FutureWarning: convert_objects is deprecated.  To re-infer data dtypes for object columns, use DataFrame.infer_objects()
+For all other conversions use the data-type specific converters pd.to_datetime, pd.to_timedelta and pd.to_numeric.
+  self.loadlist = self.loadlist.replace('\W', '', regex=True).convert_objects(convert_numeric=True) # TEST! #
+data_cleanup.py:47: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
+  self.visual.loc[-1] = list(range(len(self.columns)))
+
+Processing  dummy1.csv
+
+Index numbers of columns and first 5 rows of input: 
+   ANT 28-4_Cruise  Station  Station  Depth [m]  Type  day/mon/yr  time (UTC)  \
+0              0.0      1.0      2.0        3.0   4.0         5.0         6.0   
+1              NaN      NaN      NaN       45.0  51.0         NaN         NaN   
+2              NaN     74.0     16.0       10.0  68.0         NaN        13.0   
+3              NaN      NaN      NaN        NaN   NaN        38.0         NaN   
+4              NaN     13.0      7.0       13.0   NaN         NaN         NaN   
+5             74.0     23.0      NaN        NaN   4.0        43.0         NaN   
+
+   Lon (°W)  Lat (°S)  Bot. Depth [m]  Depth [m]  Pres [dbar]  Salinity [psu]  \
+0       7.0       8.0             9.0       10.0         11.0            12.0   
+1       NaN      22.0            35.0       73.0          NaN            91.0   
+2      56.0      45.0            71.0        5.0          NaN             NaN   
+3       1.0       NaN            19.0        NaN         53.0            40.0   
+4       NaN      59.0             NaN        NaN          NaN             NaN   
+5      25.0       NaN            80.0       44.0         60.0            90.0   
+
+   Fluorometer [V]  Transmission [proz]  pot.Temperature [°C]  Sigma [kg m-3]  \
+0             13.0                 14.0                  15.0            16.0   
+1             95.0                  NaN                  49.0             NaN   
+2              NaN                  NaN                   NaN             NaN   
+3              NaN                  NaN                  52.0            70.0   
+4              NaN                 66.0                  22.0             NaN   
+5             88.0                 33.0                   NaN             NaN   
+
+   OLD_Bacterial cells_Bac [cells/ml]  NEW_Bac_All/ml  \
+0                                17.0            18.0   
+1                                75.0             NaN   
+2                                 NaN            71.0   
+3                                19.0             NaN   
+4                                 NaN             NaN   
+5                                 NaN             NaN   
+
+   Bacterial Biomass Production per hour_[ng C/l/h]  \
+0                                              19.0   
+1                                               NaN   
+2                                              13.0   
+3                                              34.0   
+4                                              64.0   
+5                                              61.0   
+
+   Bacterial Biomass Production per day_[µg C/l/d]  \
+0                                             20.0   
+1                                             89.0   
+2                                             20.0   
+3                                              NaN   
+4                                              0.0   
+5                                              NaN   
+
+   Bacterial generation time (days)_[days]  Glucose turnover rate _[per day]  \
+0                                     21.0                              22.0   
+1                                     18.0                               NaN   
+2                                      9.0                              95.0   
+3                                      NaN                              98.0   
+4                                     30.0                              87.0   
+5                                      NaN                               NaN   
+
+   Glucose turnover time_[days]  Amino acid turnover rate _[per day]  \
+0                          23.0                                 24.0   
+1                           NaN                                  NaN   
+2                          76.0                                 39.0   
+3                          95.0                                  NaN   
+4                           NaN                                 90.0   
+5                          95.0                                  NaN   
+
+   Amino acid turnover time_[days]  Chl a_mean chl a [µg/L]  sd [µg/L]  \
+0                             25.0                     26.0       27.0   
+1                             70.0                     65.0        2.0   
+2                             58.0                      NaN       84.0   
+3                              NaN                      NaN       90.0   
+4                              7.0                      NaN       29.0   
+5                              NaN                     69.0       50.0   
+
+   cv [%]  Dissolved Inorganic Nutrients_NO X ( µM)  NO2 ( µM )  NO3 (µM )  \
+0    28.0                                      29.0        30.0       31.0   
+1     NaN                                      53.0         NaN        NaN   
+2     NaN                                      46.0        14.0       31.0   
+3    74.0                                      77.0         NaN        NaN   
+4     NaN                                      71.0        27.0       15.0   
+5    78.0                                       NaN        64.0        NaN   
+
+   PO4 ( µM )  Si  ( µM )  Unnamed: 34_level_2  counts/ml  Bac_All/ml  HNA/ml  \
+0        32.0        33.0                 34.0       35.0        36.0    37.0   
+1         NaN        89.0                  NaN        NaN         NaN    73.0   
+2         NaN        38.0                  NaN       49.0        57.0    64.0   
+3        44.0        69.0                 85.0       99.0         NaN    46.0   
+4         NaN         NaN                 96.0       36.0         NaN    78.0   
+5         NaN         NaN                  NaN        NaN         NaN     NaN   
+
+   LNA/ml  Bac_size [µm]  HNA_size [µm]  LNA_size [µm]  Bac_SSC  HNA_SSC  \
+0    38.0           39.0           40.0           41.0     42.0     43.0   
+1     NaN            NaN           78.0           88.0     11.0      NaN   
+2    74.0           48.0           14.0            9.0      NaN      NaN   
+3     NaN            NaN            NaN           77.0      NaN     85.0   
+4     NaN           58.0            NaN           66.0      NaN     99.0   
+5    87.0            NaN            NaN            NaN     64.0      NaN   
+
+   LNA_SSC  counts/ml  Prokaryotes/ml  Pico/ml  Nano/ml  Micro/ml  \
+0     44.0       45.0            46.0     47.0     48.0      49.0   
+1      NaN        NaN             NaN     59.0      NaN      55.0   
+2      NaN        NaN            34.0      NaN      NaN       NaN   
+3      NaN        NaN            42.0      2.0     11.0       NaN   
+4     35.0        NaN             NaN      NaN      NaN      35.0   
+5     28.0        NaN            47.0     35.0     43.0      60.0   
+
+   Eukaryotes/ml  Prokaryotes rel.µm  Pico rel.µm  Nano rel.µm  Micro rel.µm  \
+0           50.0                51.0         52.0         53.0          54.0   
+1           71.0                31.0          NaN          NaN           NaN   
+2            NaN                87.0          NaN         54.0          82.0   
+3            NaN                 NaN          NaN          NaN          18.0   
+4           77.0                 NaN         74.0          NaN           NaN   
+5            NaN                20.0          2.0          NaN          70.0   
+
+   Eukaryotes rel.µm  Prokaryotes SSC  Pico SSC  Nano SSC  Micro  SSC  \
+0               55.0             56.0      57.0      58.0        59.0   
+1               21.0              NaN       NaN       NaN        80.0   
+2                7.0              8.0      69.0      77.0         NaN   
+3                NaN              NaN       NaN      88.0        40.0   
+4                NaN              NaN      48.0       NaN        25.0   
+5               13.0             99.0      26.0       NaN         NaN   
+
+   Eukaryotes SSC  Syn/ml  Proc/ml  Syn_size [µm]  Proc_size [µm]  Syn SSC  \
+0            60.0    61.0     62.0           63.0            64.0     65.0   
+1            60.0    84.0     78.0           63.0             NaN      NaN   
+2            13.0     NaN     63.0           21.0            68.0     33.0   
+3             NaN     NaN      NaN            NaN            77.0      NaN   
+4             NaN    75.0     46.0            NaN             NaN     12.0   
+5             NaN    83.0     72.0            NaN             1.0      NaN   
+
+   Proc SSC  Unnamed: 67_level_2  Unnamed: 68_level_2  Unnamed: 69_level_2  \
+0      66.0                 67.0                 68.0                 69.0   
+1      91.0                 46.0                  NaN                 68.0   
+2      55.0                 99.0                 17.0                  NaN   
+3      77.0                  NaN                  NaN                  NaN   
+4       NaN                 26.0                  NaN                 15.0   
+5       NaN                  NaN                  1.0                  NaN   
+
+   Bemerkungen  TPN[µg/l]  POC [µg/l]  Depth [m]  
+0         70.0       71.0        72.0       73.0  
+1          NaN       92.0         NaN       55.0  
+2          NaN       10.0         NaN       47.0  
+3         72.0        NaN         NaN       22.0  
+4          NaN        NaN         NaN        NaN  
+5          NaN        NaN         NaN        4.0  
+
+Duplicated columns were detected in case of  Station 2 
+
+Would you like to delete duplicated columns? Please answer Yes or No! yes
+The following duplicated columns were found. Which one would you like to keep?
+data_cleanup.py:139: FutureWarning: supplying multiple axes to axis is deprecated and will be removed in a future version.
+  print obj.tableindex[~(obj.tableindex != key)].dropna(how="all", axis=[0,1])   # indexes and dup. names in
+         1        2
+0  Station  Station
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+1
+
+
+Duplicated columns were detected in case of  Depth [m] 3 
+
+Would you like to delete duplicated columns? Please answer Yes or No! yes
+The following duplicated columns were found. Which one would you like to keep?
+          3          10         73
+0  Depth [m]  Depth [m]  Depth [m]
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+10
+73
+
+
+Duplicated columns were detected in case of  counts/ml 2 
+
+Would you like to delete duplicated columns? Please answer Yes or No! yes
+The following duplicated columns were found. Which one would you like to keep?
+          35         45
+0  counts/ml  counts/ml
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+35
+45
+
+
+Would you like to drop any other column? Please answer Yes or No! yes
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+4
+5 
+6
+17
+27
+28
+34
+36
+67
+68
+69
+70
+
+
+Would you like to substitute missing column values with zeros, for instance Prochlorococcus measurements? Please answer Yes or No! yes
+Please type the index numbers of the colums to be substituted. Once you are ready, hit Enter!
+62
+64
+66
+
+
+Would you like to calculate growth rate based on bacterial generation time? Please answer Yes or No! yes
+Please type the index number of the bacterial generation time. Once you are ready, hit Enter!
+21
+
+
+Processing  dummy2.csv
+
+Index numbers of columns and first 5 rows of input: 
+   ANT 28-4_Cruise  Station  Station  Depth [m]  Type  day/mon/yr  time (UTC)  \
+0              0.0      1.0      2.0        3.0   4.0         5.0         6.0   
+1             43.0     29.0      NaN        NaN   NaN        22.0        24.0   
+2             12.0      NaN      NaN       11.0  13.0         1.0        53.0   
+3              NaN     13.0      NaN        NaN   NaN        65.0        49.0   
+4             87.0     16.0     83.0        8.0   NaN         NaN        20.0   
+5              0.0     53.0     91.0       25.0  50.0         NaN        48.0   
+
+   Lon (°W)  Lat (°S)  Bot. Depth [m]  Depth [m]  Pres [dbar]  Salinity [psu]  \
+0       7.0       8.0             9.0       10.0         11.0            12.0   
+1       NaN       NaN             NaN        NaN          NaN             NaN   
+2      18.0       NaN             NaN       14.0         79.0            32.0   
+3       NaN      95.0            34.0       31.0         50.0             NaN   
+4       NaN       NaN            93.0        5.0          6.0            70.0   
+5       NaN       NaN            16.0       43.0          NaN            43.0   
+
+   Fluorometer [V]  Transmission [proz]  pot.Temperature [°C]  Sigma [kg m-3]  \
+0             13.0                 14.0                  15.0            16.0   
+1              NaN                 69.0                   NaN            41.0   
+2              NaN                  NaN                   NaN            86.0   
+3             61.0                  NaN                   NaN             NaN   
+4              8.0                  NaN                   NaN             NaN   
+5              NaN                 47.0                  55.0             NaN   
+
+   OLD_Bacterial cells_Bac [cells/ml]  NEW_Bac_All/ml  \
+0                                17.0            18.0   
+1                                30.0             2.0   
+2                                 7.0            94.0   
+3                                 NaN            50.0   
+4                                65.0             5.0   
+5                                57.0             NaN   
+
+   Bacterial Biomass Production per hour_[ng C/l/h]  \
+0                                              19.0   
+1                                               NaN   
+2                                              31.0   
+3                                              43.0   
+4                                               NaN   
+5                                              26.0   
+
+   Bacterial Biomass Production per day_[µg C/l/d]  \
+0                                             20.0   
+1                                             52.0   
+2                                             60.0   
+3                                             47.0   
+4                                              NaN   
+5                                             33.0   
+
+   Bacterial generation time (days)_[days]  Glucose turnover rate _[per day]  \
+0                                     21.0                              22.0   
+1                                      7.0                               5.0   
+2                                     91.0                              51.0   
+3                                     46.0                               NaN   
+4                                     95.0                               NaN   
+5                                     77.0                              13.0   
+
+   Glucose turnover time_[days]  Amino acid turnover rate _[per day]  \
+0                          23.0                                 24.0   
+1                           NaN                                  NaN   
+2                           NaN                                  NaN   
+3                           NaN                                  NaN   
+4                          66.0                                 61.0   
+5                          37.0                                 15.0   
+
+   Amino acid turnover time_[days]  Chl a_mean chl a [µg/L]  sd [µg/L]  \
+0                             25.0                     26.0       27.0   
+1                              6.0                      NaN        2.0   
+2                              NaN                      NaN       53.0   
+3                             11.0                     56.0        NaN   
+4                             12.0                     37.0       63.0   
+5                              7.0                     41.0        NaN   
+
+   cv [%]  Dissolved Inorganic Nutrients_NO X ( µM)  NO2 ( µM )  NO3 (µM )  \
+0    28.0                                      29.0        30.0       31.0   
+1     NaN                                      76.0         NaN       70.0   
+2     NaN                                       NaN         0.0        NaN   
+3    29.0                                       NaN         NaN        NaN   
+4     NaN                                       NaN         NaN       33.0   
+5     NaN                                       4.0        48.0        NaN   
+
+   PO4 ( µM )  Si  ( µM )  Unnamed: 34_level_2  counts/ml  Bac_All/ml  HNA/ml  \
+0        32.0        33.0                 34.0       35.0        36.0    37.0   
+1         2.0        44.0                 48.0        4.0        80.0     NaN   
+2        49.0        25.0                 98.0        NaN        34.0     2.0   
+3         6.0         NaN                  NaN        NaN         NaN     NaN   
+4        83.0         NaN                  NaN       80.0         NaN    45.0   
+5        44.0        10.0                 91.0        NaN         NaN     NaN   
+
+   LNA/ml  Bac_size [µm]  HNA_size [µm]  LNA_size [µm]  Bac_SSC  HNA_SSC  \
+0    38.0           39.0           40.0           41.0     42.0     43.0   
+1     NaN           13.0            NaN           15.0     79.0     44.0   
+2     NaN           51.0            NaN            NaN     48.0     91.0   
+3     NaN           73.0            5.0            NaN     57.0      NaN   
+4     NaN           73.0           82.0           78.0      NaN     23.0   
+5    39.0            NaN           17.0           67.0      NaN      NaN   
+
+   LNA_SSC  counts/ml  Prokaryotes/ml  Pico/ml  Nano/ml  Micro/ml  \
+0     44.0       45.0            46.0     47.0     48.0      49.0   
+1      NaN       14.0            37.0     27.0     86.0      34.0   
+2     55.0        NaN            29.0     80.0      NaN      12.0   
+3     90.0       42.0             NaN     86.0      NaN       NaN   
+4     59.0       98.0            24.0      NaN     96.0       NaN   
+5     45.0       83.0            11.0     71.0      0.0      85.0   
+
+   Eukaryotes/ml  Prokaryotes rel.µm  Pico rel.µm  Nano rel.µm  Micro rel.µm  \
+0           50.0                51.0         52.0         53.0          54.0   
+1           58.0                 NaN          NaN          NaN          22.0   
+2            NaN                36.0         91.0          NaN           NaN   
+3            NaN                 NaN          NaN         61.0          46.0   
+4            NaN                 NaN          NaN         36.0           NaN   
+5           74.0                26.0          NaN          NaN          50.0   
+
+   Eukaryotes rel.µm  Prokaryotes SSC  Pico SSC  Nano SSC  Micro  SSC  \
+0               55.0             56.0      57.0      58.0        59.0   
+1               12.0             85.0      40.0       NaN        57.0   
+2               44.0              NaN       6.0       NaN        54.0   
+3               38.0             18.0       NaN       NaN        98.0   
+4               92.0              NaN      57.0      57.0        21.0   
+5                NaN             14.0       NaN       NaN         NaN   
+
+   Eukaryotes SSC  Syn/ml  Proc/ml  Syn_size [µm]  Proc_size [µm]  Syn SSC  \
+0            60.0    61.0     62.0           63.0            64.0     65.0   
+1            70.0    20.0     73.0            NaN             NaN      NaN   
+2             NaN    91.0     71.0           12.0             NaN      NaN   
+3            58.0    99.0     69.0           72.0            88.0      NaN   
+4             NaN     NaN     45.0           97.0             6.0     53.0   
+5            73.0     NaN      NaN            NaN             NaN     69.0   
+
+   Proc SSC  Unnamed: 67_level_2  Unnamed: 68_level_2  Unnamed: 69_level_2  \
+0      66.0                 67.0                 68.0                 69.0   
+1      94.0                  NaN                 44.0                 53.0   
+2       NaN                 44.0                  NaN                  NaN   
+3      49.0                 73.0                  NaN                 21.0   
+4       NaN                 44.0                  NaN                 51.0   
+5       NaN                  NaN                 92.0                  NaN   
+
+   Bemerkungen  TPN[µg/l]  POC [µg/l]  Depth [m]  
+0         70.0       71.0        72.0       73.0  
+1         67.0        NaN         NaN        NaN  
+2         38.0       30.0        69.0        8.0  
+3         86.0       95.0         NaN        NaN  
+4         88.0        NaN         NaN       91.0  
+5         51.0        NaN         NaN        NaN  
+
+Duplicated columns were detected in case of  Station 2 
+
+Would you like to delete duplicated columns? Please answer Yes or No! yes
+The following duplicated columns were found. Which one would you like to keep?
+         1        2
+0  Station  Station
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+1
+
+
+Duplicated columns were detected in case of  Depth [m] 3 
+
+Would you like to delete duplicated columns? Please answer Yes or No! yes
+The following duplicated columns were found. Which one would you like to keep?
+          3          10         73
+0  Depth [m]  Depth [m]  Depth [m]
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+10
+73
+
+
+Duplicated columns were detected in case of  counts/ml 2 
+
+Would you like to delete duplicated columns? Please answer Yes or No! yes
+The following duplicated columns were found. Which one would you like to keep?
+          35         45
+0  counts/ml  counts/ml
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+35
+45
+
+
+Would you like to drop any other column? Please answer Yes or No! yes
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+4
+5
+6
+17
+27
+28
+34
+36
+67
+68
+69
+70
+
+
+Would you like to substitute missing column values with zeros, for instance Prochlorococcus measurements? Please answer Yes or No! yes
+Please type the index numbers of the colums to be substituted. Once you are ready, hit Enter!
+62
+64
+66
+
+
+Would you like to calculate growth rate based on bacterial generation time? Please answer Yes or No! yes
+Please type the index number of the bacterial generation time. Once you are ready, hit Enter!
+21
+
+
+Processing  dummy3.csv
+
+Index numbers of columns and first 5 rows of input: 
+   ANT 28-5_Cruise  Station  Station  Depth [m]  Type  mon/day/yr  hh:mm  \
+0              0.0      1.0      2.0        3.0   4.0         5.0    6.0   
+1              8.0     62.0      NaN        NaN  97.0        73.0   97.0   
+2              NaN      NaN      NaN       78.0  83.0        32.0    NaN   
+3              NaN     45.0      NaN        NaN   NaN        61.0    NaN   
+4              NaN      NaN      NaN       58.0   NaN        25.0   10.0   
+5             53.0      4.0      NaN        NaN   NaN         NaN    NaN   
+
+   Lon (°E)  Lat (°N)  Bot. Depth [m]  Depth [m]  Pres [dbar]  \
+0       7.0       8.0             9.0       10.0         11.0   
+1       NaN       NaN             NaN        NaN          NaN   
+2      88.0       NaN             NaN        NaN          NaN   
+3       NaN      22.0            72.0       89.0         98.0   
+4      76.0       NaN            81.0       79.0         82.0   
+5       0.0       3.0            30.0       81.0          5.0   
+
+   Temperature [°C]  Salinity [psu]  pot.Temperature [°C]  Sigma  \
+0              12.0            13.0                  14.0   15.0   
+1               NaN             NaN                   NaN   48.0   
+2              73.0             0.0                  17.0   20.0   
+3               NaN             NaN                   NaN   10.0   
+4              74.0            35.0                  42.0   75.0   
+5               NaN            93.0                  42.0   33.0   
+
+   Oxygen [ml/l]  OxygSat [proz]  Transmission [proz]  Fluorometer [V]  \
+0           16.0            17.0                 18.0             19.0   
+1           26.0             NaN                 48.0              NaN   
+2            NaN             NaN                  NaN              3.0   
+3            NaN             NaN                  NaN             21.0   
+4            NaN            96.0                  NaN             18.0   
+5           35.0            73.0                 27.0              NaN   
+
+   Bacterial Biomass Production per hour_OLD_[ng C/l/h]  \
+0                                               20.0      
+1                                               93.0      
+2                                                NaN      
+3                                               67.0      
+4                                                5.0      
+5                                               15.0      
+
+   Bacterial Biomass Production per day_[µg C/l/d]  \
+0                                             21.0   
+1                                              NaN   
+2                                             43.0   
+3                                              NaN   
+4                                             33.0   
+5                                             12.0   
+
+   Bacterial generation time (days)_[days]  Glucose turnover rate _[per day]  \
+0                                     22.0                              23.0   
+1                                      NaN                               NaN   
+2                                      NaN                              30.0   
+3                                     38.0                               NaN   
+4                                     31.0                              97.0   
+5                                     92.0                               NaN   
+
+   Glucose turnover time_[days]  Amino acid turnover rate _[per day]  \
+0                          24.0                                 25.0   
+1                          95.0                                  NaN   
+2                          83.0                                  NaN   
+3                           NaN                                  NaN   
+4                           NaN                                 55.0   
+5                           NaN                                 10.0   
+
+   Amino acid turnover time_[days]  Unnamed: 27_level_2  \
+0                             26.0                 27.0   
+1                             19.0                  NaN   
+2                              NaN                  NaN   
+3                              0.0                  NaN   
+4                              NaN                 22.0   
+5                             41.0                 44.0   
+
+   Chl a_mean chl a [µg/L]  Station  Depth [m]  Stationen  Tiefen ( m )  \
+0                     28.0     29.0       30.0       31.0          32.0   
+1                      NaN     26.0        NaN       60.0          17.0   
+2                     85.0     95.0        NaN        NaN           NaN   
+3                     96.0      NaN       18.0       65.0           NaN   
+4                     41.0      NaN        NaN        3.0           NaN   
+5                      NaN      NaN       98.0       24.0          95.0   
+
+   Dissolved Inorganic Nutrients_NO X ( µM)  \
+0                                      33.0   
+1                                       NaN   
+2                                      69.0   
+3                                       NaN   
+4                                      98.0   
+5                                       6.0   
+
+   red: bad calibration, do not use_NO2 ( µM )  NO3 (µM )  PO4 ( µM )  \
+0                                         34.0       35.0        36.0   
+1                                          NaN        NaN         NaN   
+2                                          NaN       60.0        61.0   
+3                                         69.0       90.0         NaN   
+4                                         66.0        NaN         NaN   
+5                                         62.0        NaN         NaN   
+
+   Si  ( µM )  NEW_Bac_All_Bac_all [/ml]  HNA_HNA [/ml]  LNA_LNA [/ml]  \
+0        37.0                       38.0           39.0           40.0   
+1         NaN                       31.0           67.0           65.0   
+2        37.0                       61.0           55.0            NaN   
+3         NaN                        NaN           44.0            NaN   
+4         NaN                        NaN           29.0            NaN   
+5        71.0                       38.0            NaN            NaN   
+
+   Bac_size [µm]  HNA_size [µm]  LNA_size [µm]  Bac_SSC  HNA_SSC  LNA_SSC  \
+0           41.0           42.0           43.0     44.0     45.0     46.0   
+1            NaN            NaN            NaN     93.0     66.0      1.0   
+2           62.0           23.0            NaN      NaN     34.0      NaN   
+3            NaN           31.0           16.0      NaN     92.0     69.0   
+4            NaN            NaN            NaN      NaN      NaN      NaN   
+5            NaN            NaN            NaN      NaN      NaN     31.0   
+
+   Prokaryotes_Prokaryotes/ml  Picoplankton/ml_Pico/ml  \
+0                        47.0                     48.0   
+1                         NaN                     79.0   
+2                         NaN                     31.0   
+3                         3.0                      0.0   
+4                         NaN                      NaN   
+5                         NaN                      NaN   
+
+   Nanoplankton/ml_Nano/ml  Microplankton/ml_Micro/ml  \
+0                     49.0                       50.0   
+1                     96.0                       87.0   
+2                      NaN                       11.0   
+3                      NaN                       45.0   
+4                      NaN                        NaN   
+5                      NaN                        NaN   
+
+   Eukaryotes_Eukaryotes/ml  Prokaryotes_Prokaryotes rel.µm  Pico_Pico rel.µm  \
+0                      51.0                            52.0              53.0   
+1                      98.0                             NaN               NaN   
+2                      78.0                             NaN              93.0   
+3                      42.0                            49.0               NaN   
+4                       NaN                            77.0              12.0   
+5                       NaN                             NaN               NaN   
+
+   Nano_Nano rel.µm  Micro_Micro rel.µm  Eukaryotes_Eukaryotes rel.µm  \
+0              54.0                55.0                          56.0   
+1              66.0                10.0                           NaN   
+2              23.0                 5.0                          55.0   
+3               NaN                64.0                           NaN   
+4               NaN                 NaN                           NaN   
+5              19.0                 0.0                          79.0   
+
+   Prokaryotes_Prokaryotes SSC  Pico_Pico SSC  Nano_Nano SSC  \
+0                         57.0           58.0           59.0   
+1                          NaN            NaN           45.0   
+2                          NaN           60.0            NaN   
+3                          NaN            NaN           22.0   
+4                          NaN           17.0            NaN   
+5                          NaN           94.0           35.0   
+
+   Micro_Micro  SSC  Eukaryotes_Eukaryotes SSC  Unnamed: 62_level_2  Syn/ml  \
+0              60.0                       61.0                 62.0    63.0   
+1               NaN                       89.0                 61.0     NaN   
+2               NaN                       87.0                  NaN    94.0   
+3              92.0                        NaN                  NaN    45.0   
+4               NaN                       91.0                 32.0    46.0   
+5               NaN                       29.0                 63.0     NaN   
+
+   Proc/ml  Syn_size [µm]  Proc_size [µm]  Syn SSC  Proc SSC  MW TPN[µg/l]  \
+0     64.0           65.0            66.0     67.0      68.0          69.0   
+1     36.0            NaN            55.0     21.0      24.0           NaN   
+2     45.0            NaN            76.0     94.0       NaN          42.0   
+3     83.0            NaN            20.0     98.0      32.0          13.0   
+4     54.0           56.0             NaN      NaN      87.0           NaN   
+5      NaN           27.0             0.0     44.0       NaN           NaN   
+
+   MW POC [µg/l]  Depth [m]  
+0           70.0       71.0  
+1            NaN        NaN  
+2           81.0       22.0  
+3            NaN        NaN  
+4            NaN        NaN  
+5            NaN        NaN  
+
+Duplicated columns were detected in case of  Station 3 
+
+Would you like to delete duplicated columns? Please answer Yes or No! yes
+The following duplicated columns were found. Which one would you like to keep?
+        1        2        29
+0  Station  Station  Station
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+1
+29
+
+
+Duplicated columns were detected in case of  Depth [m] 4 
+
+Would you like to delete duplicated columns? Please answer Yes or No! yes
+The following duplicated columns were found. Which one would you like to keep?
+          3          10         30         71
+0  Depth [m]  Depth [m]  Depth [m]  Depth [m]
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+10
+30
+71
+
+
+Would you like to drop any other column? Please answer Yes or No! yes
+Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!
+4
+5 
+6
+27
+31
+32
+62
+
+
+Would you like to substitute missing column values with zeros, for instance Prochlorococcus measurements? Please answer Yes or No! yes
+Please type the index numbers of the colums to be substituted. Once you are ready, hit Enter!
+64
+66
+68
+
+
+Would you like to calculate growth rate based on bacterial generation time? Please answer Yes or No! yes
+Please type the index number of the bacterial generation time. Once you are ready, hit Enter!
+21
+
+I have found non-matching column names:
+set(['Lon (\xc2\xb0W)', 'Picoplankton/ml_Pico/ml', 'NO2 ( \xc2\xb5M )', 'ANT 28-5_Cruise', 'POC [\xc2\xb5g/l]', 'red: bad calibration, do not use_NO2 ( \xc2\xb5M )', 'Nano rel.\xc2\xb5m', 'Eukaryotes/ml', 'Bacterial Biomass Production per hour_[ng C/l/h]', 'MW POC [\xc2\xb5g/l]', 'Bacterial Biomass Production per hour_OLD_[ng C/l/h]', 'Prokaryotes rel.\xc2\xb5m', 'Micro rel.\xc2\xb5m', 'ANT 28-4_Cruise', 'Nanoplankton/ml_Nano/ml', 'Micro_Micro rel.\xc2\xb5m', 'Eukaryotes_Eukaryotes SSC', 'Micro  SSC', 'Microplankton/ml_Micro/ml', 'Micro_Micro  SSC', 'Prokaryotes_Prokaryotes/ml', 'Lat (\xc2\xb0S)', 'Pico_Pico SSC', 'NEW_Bac_All_Bac_all [/ml]', 'TPN[\xc2\xb5g/l]', 'Prokaryotes_Prokaryotes rel.\xc2\xb5m', 'Temperature [\xc2\xb0C]', 'Eukaryotes_Eukaryotes rel.\xc2\xb5m', 'OxygSat [proz]', 'Nano_Nano rel.\xc2\xb5m', 'HNA/ml', 'Nano_Nano SSC', 'Eukaryotes rel.\xc2\xb5m', 'Pico/ml', 'LNA/ml', 'Eukaryotes SSC', 'HNA_HNA [/ml]', 'Prokaryotes/ml', 'Sigma', 'Lat (\xc2\xb0N)', 'Oxygen [ml/l]', 'Nano/ml', 'Pico_Pico rel.\xc2\xb5m', 'Sigma [kg m-3]', 'Micro/ml', 'MW TPN[\xc2\xb5g/l]', 'Pico SSC', 'Lon (\xc2\xb0E)', 'Eukaryotes_Eukaryotes/ml', 'Pico rel.\xc2\xb5m', 'NEW_Bac_All/ml', 'LNA_LNA [/ml]', 'Prokaryotes_Prokaryotes SSC', 'Nano SSC', 'Prokaryotes SSC'])
+Some headers are not exactly matching. To find possible typos, a similarity analysis is going to be performed. The program tries to find the 3 closest match.
+
+Clostest 3 matches to  Lon (°W) :  [('Lon (°E)', 83), ('red: bad calibration, do not use_NO2 ( µM )', 60), ('LNA_LNA [/ml]', 60)]
+Please choose for  Lon (°W) substituting header name (can be one of the clostest matches, or  Lon (°W)  as well)
+New header: Lon
+Clostest 3 matches to  Picoplankton/ml_Pico/ml :  [('Pico/ml', 90), ('Microplankton/ml_Micro/ml', 88), ('Eukaryotes/ml', 86)]
+Please choose for  Picoplankton/ml_Pico/ml substituting header name (can be one of the clostest matches, or  Picoplankton/ml_Pico/ml  as well)
+New header: Picoplankton/ml
+Clostest 3 matches to  NO2 ( µM ) :  [('red: bad calibration, do not use_NO2 ( µM )', 90), ('Prokaryotes rel.µm', 86), ('Micro rel.µm', 86)]
+Please choose for  NO2 ( µM ) substituting header name (can be one of the clostest matches, or  NO2 ( µM )  as well)
+New header: NO2 ( µM )
+Clostest 3 matches to  ANT 28-5_Cruise :  [('ANT 28-4_Cruise', 93), ('Lon (°E)', 51), ('Lat (°S)', 48)]
+Please choose for  ANT 28-5_Cruise substituting header name (can be one of the clostest matches, or  ANT 28-5_Cruise  as well)
+New header: Cruise
+Clostest 3 matches to  POC [µg/l] :  [('MW POC [µg/l]', 95), ('Bacterial Biomass Production per hour_[ng C/l/h]', 86), ('Bacterial Biomass Production per hour_OLD_[ng C/l/h]', 86)]
+Please choose for  POC [µg/l] substituting header name (can be one of the clostest matches, or  POC [µg/l]  as well)
+New header: POC [µg/l]
+Clostest 3 matches to  red: bad calibration, do not use_NO2 ( µM ) :  [('NO2 ( µM )', 90), ('Nano rel.µm', 86), ('Prokaryotes rel.µm', 86)]
+Please choose for  red: bad calibration, do not use_NO2 ( µM ) substituting header name (can be one of the clostest matches, or  red: bad calibration, do not use_NO2 ( µM )  as well)
+New header: NO2 ( µM )
+Clostest 3 matches to  Nano rel.µm :  [('Nano_Nano rel.µm', 90), ('red: bad calibration, do not use_NO2 ( µM )', 86), ('Prokaryotes rel.µm', 86)]
+Please choose for  Nano rel.µm substituting header name (can be one of the clostest matches, or  Nano rel.µm  as well)
+New header: Nano rel.µm
+Clostest 3 matches to  Eukaryotes/ml :  [('Eukaryotes_Eukaryotes/ml', 90), ('Picoplankton/ml_Pico/ml', 86), ('Nanoplankton/ml_Nano/ml', 86)]
+Please choose for  Eukaryotes/ml substituting header name (can be one of the clostest matches, or  Eukaryotes/ml  as well)
+New header: Eukaryotes/ml
+Clostest 3 matches to  Bacterial Biomass Production per hour_[ng C/l/h] :  [('Bacterial Biomass Production per hour_OLD_[ng C/l/h]', 96), ('POC [µg/l]', 86), ('MW POC [µg/l]', 86)]
+Please choose for  Bacterial Biomass Production per hour_[ng C/l/h] substituting header name (can be one of the clostest matches, or  Bacterial Biomass Production per hour_[ng C/l/h]  as well)
+New header: Bacterial Biomass Production per hour_[ng C/l/h]
+Clostest 3 matches to  MW POC [µg/l] :  [('POC [µg/l]', 95), ('Bacterial Biomass Production per hour_[ng C/l/h]', 86), ('Bacterial Biomass Production per hour_OLD_[ng C/l/h]', 86)]
+Please choose for  MW POC [µg/l] substituting header name (can be one of the clostest matches, or  MW POC [µg/l]  as well)
+New header: POC [µg/l]
+Clostest 3 matches to  Bacterial Biomass Production per hour_OLD_[ng C/l/h] :  [('Bacterial Biomass Production per hour_[ng C/l/h]', 96), ('POC [µg/l]', 86), ('MW POC [µg/l]', 86)]
+Please choose for  Bacterial Biomass Production per hour_OLD_[ng C/l/h] substituting header name (can be one of the clostest matches, or  Bacterial Biomass Production per hour_OLD_[ng C/l/h]  as well)
+New header: Bacterial Biomass Production per hour_[ng C/l/h]
+Clostest 3 matches to  Prokaryotes rel.µm :  [('Prokaryotes_Prokaryotes rel.µm', 90), ('NO2 ( µM )', 86), ('red: bad calibration, do not use_NO2 ( µM )', 86)]
+Please choose for  Prokaryotes rel.µm substituting header name (can be one of the clostest matches, or  Prokaryotes rel.µm  as well)
+New header: Prokaryotes rel.µm
+Clostest 3 matches to  Micro rel.µm :  [('Micro_Micro rel.µm', 90), ('NO2 ( µM )', 86), ('red: bad calibration, do not use_NO2 ( µM )', 86)]
+Please choose for  Micro rel.µm substituting header name (can be one of the clostest matches, or  Micro rel.µm  as well)
+New header: Micro rel.µm
+Clostest 3 matches to  ANT 28-4_Cruise :  [('ANT 28-5_Cruise', 93), ('Lon (°E)', 51), ('Lat (°S)', 48)]
+Please choose for  ANT 28-4_Cruise substituting header name (can be one of the clostest matches, or  ANT 28-4_Cruise  as well)
+New header: Cruise
+Clostest 3 matches to  Nanoplankton/ml_Nano/ml :  [('Nano/ml', 90), ('Eukaryotes/ml', 86), ('HNA/ml', 86)]
+Please choose for  Nanoplankton/ml_Nano/ml substituting header name (can be one of the clostest matches, or  Nanoplankton/ml_Nano/ml  as well)
+New header: Nanoplankton/ml
+Clostest 3 matches to  Micro_Micro rel.µm :  [('Micro rel.µm', 90), ('NO2 ( µM )', 86), ('red: bad calibration, do not use_NO2 ( µM )', 86)]
+Please choose for  Micro_Micro rel.µm substituting header name (can be one of the clostest matches, or  Micro_Micro rel.µm  as well)
+New header: Micro rel.µm
+Clostest 3 matches to  Eukaryotes_Eukaryotes SSC :  [('Eukaryotes SSC', 90), ('Eukaryotes_Eukaryotes/ml', 90), ('Micro  SSC', 86)]
+Please choose for  Eukaryotes_Eukaryotes SSC substituting header name (can be one of the clostest matches, or  Eukaryotes_Eukaryotes SSC  as well)
+New header: Eukaryotes SSC
+Clostest 3 matches to  Micro  SSC :  [('Micro_Micro  SSC', 90), ('Eukaryotes_Eukaryotes SSC', 86), ('Prokaryotes_Prokaryotes SSC', 86)]
+Please choose for  Micro  SSC substituting header name (can be one of the clostest matches, or  Micro  SSC  as well)
+New header: Micro  SSC
+Clostest 3 matches to  Microplankton/ml_Micro/ml :  [('Micro/ml', 90), ('Picoplankton/ml_Pico/ml', 88), ('Eukaryotes/ml', 86)]
+Please choose for  Microplankton/ml_Micro/ml substituting header name (can be one of the clostest matches, or  Microplankton/ml_Micro/ml  as well)
+New header: Microplankton/ml
+Clostest 3 matches to  Micro_Micro  SSC :  [('Micro  SSC', 90), ('Eukaryotes_Eukaryotes SSC', 86), ('Pico SSC', 86)]
+Please choose for  Micro_Micro  SSC substituting header name (can be one of the clostest matches, or  Micro_Micro  SSC  as well)
+New header: Micro  SSC
+Clostest 3 matches to  Prokaryotes_Prokaryotes/ml :  [('Prokaryotes_Prokaryotes rel.µm', 91), ('Prokaryotes_Prokaryotes SSC', 91), ('Prokaryotes/ml', 90)]
+Please choose for  Prokaryotes_Prokaryotes/ml substituting header name (can be one of the clostest matches, or  Prokaryotes_Prokaryotes/ml  as well)
+New header: Prokaryotes/ml
+Clostest 3 matches to  Lat (°S) :  [('Lat (°N)', 83), ('OxygSat [proz]', 60), ('LNA_LNA [/ml]', 60)]
+Please choose for  Lat (°S) substituting header name (can be one of the clostest matches, or  Lat (°S)  as well)
+New header: Lat
+Clostest 3 matches to  Pico_Pico SSC :  [('Pico SSC', 90), ('Eukaryotes_Eukaryotes SSC', 86), ('Prokaryotes_Prokaryotes SSC', 86)]
+Please choose for  Pico_Pico SSC substituting header name (can be one of the clostest matches, or  Pico_Pico SSC  as well)
+New header: Pico SSC
+Clostest 3 matches to  NEW_Bac_All_Bac_all [/ml] :  [('Eukaryotes/ml', 86), ('HNA/ml', 86), ('Pico/ml', 86)]
+Please choose for  NEW_Bac_All_Bac_all [/ml] substituting header name (can be one of the clostest matches, or  NEW_Bac_All_Bac_all [/ml]  as well)
+New header: Bac_all/ml
+Clostest 3 matches to  TPN[µg/l] :  [('MW TPN[µg/l]', 95), ('Bacterial Biomass Production per hour_[ng C/l/h]', 86), ('MW POC [µg/l]', 86)]
+Please choose for  TPN[µg/l] substituting header name (can be one of the clostest matches, or  TPN[µg/l]  as well)
+New header: TPN[µg/l]
+Clostest 3 matches to  Prokaryotes_Prokaryotes rel.µm :  [('Prokaryotes_Prokaryotes/ml', 91), ('Prokaryotes rel.µm', 90), ('Prokaryotes_Prokaryotes SSC', 87)]
+Please choose for  Prokaryotes_Prokaryotes rel.µm substituting header name (can be one of the clostest matches, or  Prokaryotes_Prokaryotes rel.µm  as well)
+New header: Prokaryotes rel.µm
+Clostest 3 matches to  Temperature [°C] :  [('Bacterial Biomass Production per hour_[ng C/l/h]', 86), ('Bacterial Biomass Production per hour_OLD_[ng C/l/h]', 86), ('Prokaryotes SSC', 48)]
+Please choose for  Temperature [°C] substituting header name (can be one of the clostest matches, or  Temperature [°C]  as well)
+New header: Temperature [°C]
+Clostest 3 matches to  Eukaryotes_Eukaryotes rel.µm :  [('Eukaryotes rel.µm', 90), ('Eukaryotes_Eukaryotes/ml', 90), ('NO2 ( µM )', 86)]
+Please choose for  Eukaryotes_Eukaryotes rel.µm substituting header name (can be one of the clostest matches, or  Eukaryotes_Eukaryotes rel.µm  as well)
+New header: Eukaryotes rel.µm
+Clostest 3 matches to  OxygSat [proz] :  [('Lat (°S)', 60), ('Lat (°N)', 60), ('Oxygen [ml/l]', 48)]
+Please choose for  OxygSat [proz] substituting header name (can be one of the clostest matches, or  OxygSat [proz]  as well)
+New header: OxygSat [proz]
+Clostest 3 matches to  Nano_Nano rel.µm :  [('Nano rel.µm', 90), ('NO2 ( µM )', 86), ('red: bad calibration, do not use_NO2 ( µM )', 86)]
+Please choose for  Nano_Nano rel.µm substituting header name (can be one of the clostest matches, or  Nano_Nano rel.µm  as well)
+New header: Nano rel.µm
+Clostest 3 matches to  HNA/ml :  [('Picoplankton/ml_Pico/ml', 86), ('Eukaryotes/ml', 86), ('Nanoplankton/ml_Nano/ml', 86)]
+Please choose for  HNA/ml substituting header name (can be one of the clostest matches, or  HNA/ml  as well)
+New header: HNA/ml
+Clostest 3 matches to  Nano_Nano SSC :  [('Nano SSC', 90), ('Eukaryotes_Eukaryotes SSC', 86), ('Pico SSC', 86)]
+Please choose for  Nano_Nano SSC substituting header name (can be one of the clostest matches, or  Nano_Nano SSC  as well)
+New header: Nano SSC
+Clostest 3 matches to  Eukaryotes rel.µm :  [('Eukaryotes_Eukaryotes rel.µm', 90), ('NO2 ( µM )', 86), ('red: bad calibration, do not use_NO2 ( µM )', 86)]
+Please choose for  Eukaryotes rel.µm substituting header name (can be one of the clostest matches, or  Eukaryotes rel.µm  as well)
+New header: Eukaryotes rel.µm
+Clostest 3 matches to  Pico/ml :  [('Picoplankton/ml_Pico/ml', 90), ('Eukaryotes/ml', 86), ('Nanoplankton/ml_Nano/ml', 86)]
+Please choose for  Pico/ml substituting header name (can be one of the clostest matches, or  Pico/ml  as well)
+New header: Picoplankton/ml
+Clostest 3 matches to  LNA/ml :  [('Picoplankton/ml_Pico/ml', 86), ('Eukaryotes/ml', 86), ('Nanoplankton/ml_Nano/ml', 86)]
+Please choose for  LNA/ml substituting header name (can be one of the clostest matches, or  LNA/ml  as well)
+New header: LNA/ml
+Clostest 3 matches to  Eukaryotes SSC :  [('Eukaryotes_Eukaryotes SSC', 90), ('Pico SSC', 86), ('Prokaryotes_Prokaryotes SSC', 86)]
+Please choose for  Eukaryotes SSC substituting header name (can be one of the clostest matches, or  Eukaryotes SSC  as well)
+New header: Eukaryotes SSC
+Clostest 3 matches to  HNA_HNA [/ml] :  [('Picoplankton/ml_Pico/ml', 86), ('Nanoplankton/ml_Nano/ml', 86), ('Microplankton/ml_Micro/ml', 86)]
+Please choose for  HNA_HNA [/ml] substituting header name (can be one of the clostest matches, or  HNA_HNA [/ml]  as well)
+New header: HNA/ml
+Clostest 3 matches to  Prokaryotes/ml :  [('Prokaryotes_Prokaryotes/ml', 90), ('Picoplankton/ml_Pico/ml', 86), ('Prokaryotes rel.µm', 86)]
+Please choose for  Prokaryotes/ml substituting header name (can be one of the clostest matches, or  Prokaryotes/ml  as well)
+New header: Prokaryotes/ml
+Clostest 3 matches to  Sigma :  [('Sigma [kg m-3]', 90), ('red: bad calibration, do not use_NO2 ( µM )', 36), ('Eukaryotes/ml', 36)]
+Please choose for  Sigma substituting header name (can be one of the clostest matches, or  Sigma  as well)
+New header: Sigma [kg m-3]
+Clostest 3 matches to  Lat (°N) :  [('Lat (°S)', 83), ('OxygSat [proz]', 60), ('LNA_LNA [/ml]', 60)]
+Please choose for  Lat (°N) substituting header name (can be one of the clostest matches, or  Lat (°N)  as well)
+New header: Lat
+Clostest 3 matches to  Oxygen [ml/l] :  [('Picoplankton/ml_Pico/ml', 86), ('POC [µg/l]', 86), ('Bacterial Biomass Production per hour_[ng C/l/h]', 86)]
+Please choose for  Oxygen [ml/l] substituting header name (can be one of the clostest matches, or  Oxygen [ml/l]  as well)
+New header: Oxygen [ml/l]
+Clostest 3 matches to  Nano/ml :  [('Nanoplankton/ml_Nano/ml', 90), ('Picoplankton/ml_Pico/ml', 86), ('Eukaryotes/ml', 86)]
+Please choose for  Nano/ml substituting header name (can be one of the clostest matches, or  Nano/ml  as well)
+New header: Nanoplankton/ml
+Clostest 3 matches to  Pico_Pico rel.µm :  [('Pico rel.µm', 90), ('NO2 ( µM )', 86), ('red: bad calibration, do not use_NO2 ( µM )', 86)]
+Please choose for  Pico_Pico rel.µm substituting header name (can be one of the clostest matches, or  Pico_Pico rel.µm  as well)
+New header: Pico rel.µm
+Clostest 3 matches to  Sigma [kg m-3] :  [('Sigma', 90), ('NO2 ( µM )', 86), ('red: bad calibration, do not use_NO2 ( µM )', 86)]
+Please choose for  Sigma [kg m-3] substituting header name (can be one of the clostest matches, or  Sigma [kg m-3]  as well)
+New header: Sigma [kg m-3]
+Clostest 3 matches to  Micro/ml :  [('Microplankton/ml_Micro/ml', 90), ('Picoplankton/ml_Pico/ml', 86), ('Eukaryotes/ml', 86)]
+Please choose for  Micro/ml substituting header name (can be one of the clostest matches, or  Micro/ml  as well)
+New header: Microplankton/ml
+Clostest 3 matches to  MW TPN[µg/l] :  [('TPN[µg/l]', 95), ('Bacterial Biomass Production per hour_[ng C/l/h]', 86), ('Bacterial Biomass Production per hour_OLD_[ng C/l/h]', 86)]
+Please choose for  MW TPN[µg/l] substituting header name (can be one of the clostest matches, or  MW TPN[µg/l]  as well)
+New header: TPN[µg/l]
+Clostest 3 matches to  Pico SSC :  [('Pico_Pico SSC', 90), ('Eukaryotes_Eukaryotes SSC', 86), ('Micro_Micro  SSC', 86)]
+Please choose for  Pico SSC substituting header name (can be one of the clostest matches, or  Pico SSC  as well)
+New header: Pico SSC
+Clostest 3 matches to  Lon (°E) :  [('Lon (°W)', 83), ('red: bad calibration, do not use_NO2 ( µM )', 60), ('Bacterial Biomass Production per hour_[ng C/l/h]', 60)]
+Please choose for  Lon (°E) substituting header name (can be one of the clostest matches, or  Lon (°E)  as well)
+New header: Lon
+Clostest 3 matches to  Eukaryotes_Eukaryotes/ml :  [('Eukaryotes/ml', 90), ('Eukaryotes_Eukaryotes SSC', 90), ('Eukaryotes_Eukaryotes rel.µm', 90)]
+Please choose for  Eukaryotes_Eukaryotes/ml substituting header name (can be one of the clostest matches, or  Eukaryotes_Eukaryotes/ml  as well)
+New header: Eukaryotes/ml
+Clostest 3 matches to  Pico rel.µm :  [('Pico_Pico rel.µm', 90), ('red: bad calibration, do not use_NO2 ( µM )', 86), ('Prokaryotes rel.µm', 86)]
+Please choose for  Pico rel.µm substituting header name (can be one of the clostest matches, or  Pico rel.µm  as well)
+New header: Pico rel.µm
+Clostest 3 matches to  NEW_Bac_All/ml :  [('Picoplankton/ml_Pico/ml', 86), ('Nanoplankton/ml_Nano/ml', 86), ('Microplankton/ml_Micro/ml', 86)]
+Please choose for  NEW_Bac_All/ml substituting header name (can be one of the clostest matches, or  NEW_Bac_All/ml  as well)
+New header: Bac_all/ml
+Clostest 3 matches to  LNA_LNA [/ml] :  [('Picoplankton/ml_Pico/ml', 86), ('Nanoplankton/ml_Nano/ml', 86), ('Microplankton/ml_Micro/ml', 86)]
+Please choose for  LNA_LNA [/ml] substituting header name (can be one of the clostest matches, or  LNA_LNA [/ml]  as well)
+New header: LNA/ml
+Clostest 3 matches to  Prokaryotes_Prokaryotes SSC :  [('Prokaryotes_Prokaryotes/ml', 91), ('Prokaryotes SSC', 90), ('Prokaryotes_Prokaryotes rel.µm', 87)]
+Please choose for  Prokaryotes_Prokaryotes SSC substituting header name (can be one of the clostest matches, or  Prokaryotes_Prokaryotes SSC  as well)
+New header: Prokaryotes SSC
+Clostest 3 matches to  Nano SSC :  [('Nano_Nano SSC', 90), ('Eukaryotes_Eukaryotes SSC', 86), ('Micro_Micro  SSC', 86)]
+Please choose for  Nano SSC substituting header name (can be one of the clostest matches, or  Nano SSC  as well)
+New header: Nano SSC
+Clostest 3 matches to  Prokaryotes SSC :  [('Prokaryotes_Prokaryotes SSC', 90), ('Eukaryotes_Eukaryotes SSC', 86), ('Micro  SSC', 86)]
+Please choose for  Prokaryotes SSC substituting header name (can be one of the clostest matches, or  Prokaryotes SSC  as well)
+New header: Prokaryotes SSC
+The following headers will be corrected:
+{'Lon (\xc2\xb0W)': 'Lon', 'Nanoplankton/ml_Nano/ml': 'Nanoplankton/ml', 'NO2 ( \xc2\xb5M )': 'NO2 ( \xc2\xb5M )', 'ANT 28-5_Cruise': 'Cruise', 'POC [\xc2\xb5g/l]': 'POC [\xc2\xb5g/l]', 'red: bad calibration, do not use_NO2 ( \xc2\xb5M )': 'NO2 ( \xc2\xb5M )', 'Nano rel.\xc2\xb5m': 'Nano rel.\xc2\xb5m', 'Prokaryotes_Prokaryotes SSC': 'Prokaryotes SSC', 'Eukaryotes/ml': 'Eukaryotes/ml', 'Micro/ml': 'Microplankton/ml', 'Bacterial Biomass Production per hour_[ng C/l/h]': 'Bacterial Biomass Production per hour_[ng C/l/h]', 'Prokaryotes rel.\xc2\xb5m': 'Prokaryotes rel.\xc2\xb5m', 'Bacterial Biomass Production per hour_OLD_[ng C/l/h]': 'Bacterial Biomass Production per hour_[ng C/l/h]', 'Eukaryotes_Eukaryotes/ml': 'Eukaryotes/ml', 'MW POC [\xc2\xb5g/l]': 'POC [\xc2\xb5g/l]', 'Micro rel.\xc2\xb5m': 'Micro rel.\xc2\xb5m', 'Picoplankton/ml_Pico/ml': 'Picoplankton/ml', 'Micro_Micro rel.\xc2\xb5m': 'Micro rel.\xc2\xb5m', 'MW TPN[\xc2\xb5g/l]': 'TPN[\xc2\xb5g/l]', 'Micro  SSC': 'Micro  SSC', 'Microplankton/ml_Micro/ml': 'Microplankton/ml', 'Micro_Micro  SSC': 'Micro  SSC', 'NEW_Bac_All_Bac_all [/ml]': 'Bac_all/ml', 'Lat (\xc2\xb0S)': 'Lat', 'Pico_Pico SSC': 'Pico SSC', 'Pico SSC': 'Pico SSC', 'TPN[\xc2\xb5g/l]': 'TPN[\xc2\xb5g/l]', 'Prokaryotes_Prokaryotes rel.\xc2\xb5m': 'Prokaryotes rel.\xc2\xb5m', 'Temperature [\xc2\xb0C]': 'Temperature [\xc2\xb0C]', 'Eukaryotes_Eukaryotes rel.\xc2\xb5m': 'Eukaryotes rel.\xc2\xb5m', 'OxygSat [proz]': 'OxygSat [proz]', 'Prokaryotes_Prokaryotes/ml': 'Prokaryotes/ml', 'HNA/ml': 'HNA/ml', 'Nano_Nano SSC': 'Nano SSC', 'Eukaryotes rel.\xc2\xb5m': 'Eukaryotes rel.\xc2\xb5m', 'Pico/ml': 'Picoplankton/ml', 'Nano_Nano rel.\xc2\xb5m': 'Nano rel.\xc2\xb5m', 'Eukaryotes SSC': 'Eukaryotes SSC', 'HNA_HNA [/ml]': 'HNA/ml', 'Eukaryotes_Eukaryotes SSC': 'Eukaryotes SSC', 'Sigma': 'Sigma [kg m-3]', 'Lat (\xc2\xb0N)': 'Lat', 'Oxygen [ml/l]': 'Oxygen [ml/l]', 'ANT 28-4_Cruise': 'Cruise', 'Pico_Pico rel.\xc2\xb5m': 'Pico rel.\xc2\xb5m', 'Sigma [kg m-3]': 'Sigma [kg m-3]', 'Prokaryotes/ml': 'Prokaryotes/ml', 'Lon (\xc2\xb0E)': 'Lon', 'Nano/ml': 'Nanoplankton/ml', 'Pico rel.\xc2\xb5m': 'Pico rel.\xc2\xb5m', 'NEW_Bac_All/ml': 'Bac_all/ml', 'LNA_LNA [/ml]': 'LNA/ml', 'LNA/ml': 'LNA/ml', 'Nano SSC': 'Nano SSC', 'Prokaryotes SSC': 'Prokaryotes SSC'}
+{'Lon (\xc2\xb0W)': 'Lon', 'Nanoplankton/ml_Nano/ml': 'Nanoplankton/ml', 'NO2 ( \xc2\xb5M )': 'NO2 ( \xc2\xb5M )', 'ANT 28-5_Cruise': 'Cruise', 'POC [\xc2\xb5g/l]': 'POC [\xc2\xb5g/l]', 'red: bad calibration, do not use_NO2 ( \xc2\xb5M )': 'NO2 ( \xc2\xb5M )', 'Nano rel.\xc2\xb5m': 'Nano rel.\xc2\xb5m', 'Prokaryotes_Prokaryotes SSC': 'Prokaryotes SSC', 'Eukaryotes/ml': 'Eukaryotes/ml', 'Micro/ml': 'Microplankton/ml', 'Bacterial Biomass Production per hour_[ng C/l/h]': 'Bacterial Biomass Production per hour_[ng C/l/h]', 'Prokaryotes rel.\xc2\xb5m': 'Prokaryotes rel.\xc2\xb5m', 'Bacterial Biomass Production per hour_OLD_[ng C/l/h]': 'Bacterial Biomass Production per hour_[ng C/l/h]', 'Eukaryotes_Eukaryotes/ml': 'Eukaryotes/ml', 'MW POC [\xc2\xb5g/l]': 'POC [\xc2\xb5g/l]', 'Micro rel.\xc2\xb5m': 'Micro rel.\xc2\xb5m', 'Picoplankton/ml_Pico/ml': 'Picoplankton/ml', 'Micro_Micro rel.\xc2\xb5m': 'Micro rel.\xc2\xb5m', 'MW TPN[\xc2\xb5g/l]': 'TPN[\xc2\xb5g/l]', 'Micro  SSC': 'Micro  SSC', 'Microplankton/ml_Micro/ml': 'Microplankton/ml', 'Micro_Micro  SSC': 'Micro  SSC', 'NEW_Bac_All_Bac_all [/ml]': 'Bac_all/ml', 'Lat (\xc2\xb0S)': 'Lat', 'Pico_Pico SSC': 'Pico SSC', 'Pico SSC': 'Pico SSC', 'TPN[\xc2\xb5g/l]': 'TPN[\xc2\xb5g/l]', 'Prokaryotes_Prokaryotes rel.\xc2\xb5m': 'Prokaryotes rel.\xc2\xb5m', 'Temperature [\xc2\xb0C]': 'Temperature [\xc2\xb0C]', 'Eukaryotes_Eukaryotes rel.\xc2\xb5m': 'Eukaryotes rel.\xc2\xb5m', 'OxygSat [proz]': 'OxygSat [proz]', 'Prokaryotes_Prokaryotes/ml': 'Prokaryotes/ml', 'HNA/ml': 'HNA/ml', 'Nano_Nano SSC': 'Nano SSC', 'Eukaryotes rel.\xc2\xb5m': 'Eukaryotes rel.\xc2\xb5m', 'Pico/ml': 'Picoplankton/ml', 'Nano_Nano rel.\xc2\xb5m': 'Nano rel.\xc2\xb5m', 'Eukaryotes SSC': 'Eukaryotes SSC', 'HNA_HNA [/ml]': 'HNA/ml', 'Eukaryotes_Eukaryotes SSC': 'Eukaryotes SSC', 'Sigma': 'Sigma [kg m-3]', 'Lat (\xc2\xb0N)': 'Lat', 'Oxygen [ml/l]': 'Oxygen [ml/l]', 'ANT 28-4_Cruise': 'Cruise', 'Pico_Pico rel.\xc2\xb5m': 'Pico rel.\xc2\xb5m', 'Sigma [kg m-3]': 'Sigma [kg m-3]', 'Prokaryotes/ml': 'Prokaryotes/ml', 'Lon (\xc2\xb0E)': 'Lon', 'Nano/ml': 'Nanoplankton/ml', 'Pico rel.\xc2\xb5m': 'Pico rel.\xc2\xb5m', 'NEW_Bac_All/ml': 'Bac_all/ml', 'LNA_LNA [/ml]': 'LNA/ml', 'LNA/ml': 'LNA/ml', 'Nano SSC': 'Nano SSC', 'Prokaryotes SSC': 'Prokaryotes SSC'}
+Counter({'Nanoplankton/ml': 3, 'NO3 (\xc2\xb5M )': 3, 'pot.Temperature [\xc2\xb0C]': 3, 'NO2 ( \xc2\xb5M )': 3, 'HNA_size [\xc2\xb5m]': 3, 'Bacterial generation time (days)_[days]': 3, 'Lon': 3, 'POC [\xc2\xb5g/l]': 3, 'Nano rel.\xc2\xb5m': 3, 'Station': 3, 'Eukaryotes/ml': 3, 'Bac_SSC': 3, 'Bacterial Biomass Production per hour_[ng C/l/h]': 3, 'Dissolved Inorganic Nutrients_NO X ( \xc2\xb5M)': 3, 'Prokaryotes rel.\xc2\xb5m': 3, 'Growth rate': 3, 'Nano SSC': 3, 'HNA_SSC': 3, 'Proc SSC': 3, 'Micro rel.\xc2\xb5m': 3, 'Bac_all/ml': 3, 'Micro  SSC': 3, 'Syn/ml': 3, 'Transmission [proz]': 3, 'Salinity [psu]': 3, 'Syn SSC': 3, 'HNA/ml': 3, 'Lat': 3, 'Pres [dbar]': 3, 'Proc_size [\xc2\xb5m]': 3, 'Si  ( \xc2\xb5M )': 3, 'TPN[\xc2\xb5g/l]': 3, 'Amino acid turnover time_[days]': 3, 'PO4 ( \xc2\xb5M )': 3, 'Syn_size [\xc2\xb5m]': 3, 'Depth [m]': 3, 'Cruise': 3, 'LNA_size [\xc2\xb5m]': 3, 'Prokaryotes/ml': 3, 'Bacterial Biomass Production per day_[\xc2\xb5g C/l/d]': 3, 'Picoplankton/ml': 3, 'Proc/ml': 3, 'Eukaryotes SSC': 3, 'Bot. Depth [m]': 3, 'Amino acid turnover rate _[per day]': 3, 'LNA_SSC': 3, 'Prokaryotes SSC': 3, 'Eukaryotes rel.\xc2\xb5m': 3, 'Glucose turnover time_[days]': 3, 'Sigma [kg m-3]': 3, 'Bac_size [\xc2\xb5m]': 3, 'Glucose turnover rate _[per day]': 3, 'Pico SSC': 3, 'Chl a_mean chl a [\xc2\xb5g/L]': 3, 'Pico rel.\xc2\xb5m': 3, 'Microplankton/ml': 3, 'LNA/ml': 3, 'Fluorometer [V]': 3, 'OxygSat [proz]': 1, 'Temperature [\xc2\xb0C]': 1, 'Oxygen [ml/l]': 1})
+
+Merged table:
+     Cruise  Station  Depth [m]   Lon   Lat  Bot. Depth [m]  Pres [dbar]  \
+0       NaN      NaN       45.0   NaN  22.0            35.0          NaN   
+1       NaN     16.0       10.0  56.0  45.0            71.0          NaN   
+2       NaN      NaN        NaN   1.0   NaN            19.0         53.0   
+3       NaN      7.0       13.0   NaN  59.0             NaN          NaN   
+4      74.0      NaN        NaN  25.0   NaN            80.0         60.0   
+5      67.0      NaN        NaN  59.0   NaN            28.0          NaN   
+6       NaN      NaN       44.0   NaN  37.0            69.0          NaN   
+7       NaN      NaN        6.0   NaN   NaN             NaN          NaN   
+8      19.0      2.0        NaN   3.0   NaN             NaN         41.0   
+9      73.0     43.0       17.0  51.0   NaN            40.0         89.0   
+10     51.0     30.0       87.0   NaN   NaN             NaN          NaN   
+11      NaN      NaN       92.0   NaN  54.0            89.0         86.0   
+12      NaN     94.0       16.0  87.0   NaN             NaN          NaN   
+13      NaN      NaN        NaN   NaN   NaN             NaN          NaN   
+14      NaN     38.0       50.0  44.0   NaN            70.0         43.0   
+..      ...      ...        ...   ...   ...             ...          ...   
+485     NaN     96.0       15.0   NaN  31.0            97.0         56.0   
+486     2.0     41.0        NaN   NaN   NaN            99.0         59.0   
+487     NaN      NaN        NaN   NaN   2.0             8.0          NaN   
+488     NaN      NaN        NaN   NaN   0.0             NaN         46.0   
+489    70.0      NaN       38.0  14.0   NaN            15.0          NaN   
+490     NaN     61.0        NaN   NaN  50.0             NaN          NaN   
+491     NaN      NaN       56.0  71.0  27.0             6.0          NaN   
+492     NaN      NaN        NaN   NaN   NaN            24.0          NaN   
+493     NaN      NaN       64.0  62.0  17.0             NaN          NaN   
+494    71.0      NaN        NaN   NaN  91.0            69.0         32.0   
+495    67.0     30.0       51.0   NaN   NaN            25.0         12.0   
+496     NaN      NaN        NaN  52.0  79.0             NaN         75.0   
+497     NaN     63.0        NaN   NaN   NaN             NaN         55.0   
+498    95.0      NaN        NaN   NaN   NaN             NaN          6.0   
+499     NaN      NaN        NaN  25.0  29.0             NaN          NaN   
+
+     Salinity [psu]  Fluorometer [V]  Transmission [proz]  \
+0              91.0             95.0                  NaN   
+1               NaN              NaN                  NaN   
+2              40.0              NaN                  NaN   
+3               NaN              NaN                 66.0   
+4              90.0             88.0                 33.0   
+5              65.0             85.0                 68.0   
+6               NaN             46.0                 33.0   
+7              85.0              3.0                 16.0   
+8               NaN             45.0                  NaN   
+9              24.0             88.0                 48.0   
+10             68.0              NaN                  NaN   
+11             46.0              NaN                 86.0   
+12              NaN              NaN                  NaN   
+13              NaN             76.0                 56.0   
+14              NaN              NaN                 67.0   
+..              ...              ...                  ...   
+485             5.0             92.0                  NaN   
+486             NaN              NaN                  NaN   
+487            68.0              NaN                  NaN   
+488            40.0              NaN                 61.0   
+489             NaN              NaN                  NaN   
+490             NaN              9.0                  1.0   
+491            29.0              NaN                  NaN   
+492            74.0              NaN                 81.0   
+493             NaN             60.0                 76.0   
+494             4.0              NaN                  NaN   
+495             NaN             82.0                  NaN   
+496            14.0              0.0                  NaN   
+497             NaN              NaN                  NaN   
+498             NaN              NaN                  NaN   
+499            83.0             70.0                  2.0   
+
+     pot.Temperature [°C]  Sigma [kg m-3]  Bac_all/ml  \
+0                    49.0             NaN         NaN   
+1                     NaN             NaN        71.0   
+2                    52.0            70.0         NaN   
+3                    22.0             NaN         NaN   
+4                     NaN             NaN         NaN   
+5                    13.0             NaN        41.0   
+6                    33.0             NaN        72.0   
+7                     NaN             NaN        41.0   
+8                    71.0             NaN         NaN   
+9                     4.0            78.0         NaN   
+10                   74.0            61.0        63.0   
+11                    NaN             NaN         NaN   
+12                   43.0            58.0        85.0   
+13                    NaN             NaN        67.0   
+14                   84.0            83.0        43.0   
+..                    ...             ...         ...   
+485                   NaN             6.0         NaN   
+486                   NaN            35.0        22.0   
+487                   NaN            99.0         NaN   
+488                  57.0            97.0         NaN   
+489                  87.0             NaN        96.0   
+490                   NaN            17.0        33.0   
+491                   NaN             NaN        42.0   
+492                  53.0             NaN         NaN   
+493                   NaN             NaN        27.0   
+494                   NaN             NaN         NaN   
+495                   NaN             4.0        39.0   
+496                  41.0            47.0        70.0   
+497                  46.0            54.0         NaN   
+498                   NaN            17.0        32.0   
+499                  73.0            13.0        59.0   
+
+     Bacterial Biomass Production per hour_[ng C/l/h]  \
+0                                                 NaN   
+1                                                13.0   
+2                                                34.0   
+3                                                64.0   
+4                                                61.0   
+5                                                 NaN   
+6                                                 NaN   
+7                                                93.0   
+8                                                21.0   
+9                                                39.0   
+10                                               32.0   
+11                                               23.0   
+12                                               52.0   
+13                                               40.0   
+14                                                NaN   
+..                                                ...   
+485                                              59.0   
+486                                              45.0   
+487                                              44.0   
+488                                               NaN   
+489                                               NaN   
+490                                              77.0   
+491                                              51.0   
+492                                              50.0   
+493                                               NaN   
+494                                               NaN   
+495                                              65.0   
+496                                               NaN   
+497                                              98.0   
+498                                              97.0   
+499                                               NaN   
+
+     Bacterial Biomass Production per day_[µg C/l/d]  \
+0                                               89.0   
+1                                               20.0   
+2                                                NaN   
+3                                                0.0   
+4                                                NaN   
+5                                                NaN   
+6                                                NaN   
+7                                               94.0   
+8                                                NaN   
+9                                               50.0   
+10                                               NaN   
+11                                              48.0   
+12                                               NaN   
+13                                               0.0   
+14                                              41.0   
+..                                               ...   
+485                                              NaN   
+486                                              NaN   
+487                                              NaN   
+488                                              NaN   
+489                                              NaN   
+490                                             11.0   
+491                                              NaN   
+492                                              NaN   
+493                                             99.0   
+494                                              NaN   
+495                                             72.0   
+496                                              NaN   
+497                                              NaN   
+498                                              1.0   
+499                                             66.0   
+
+     Bacterial generation time (days)_[days]  \
+0                                       18.0   
+1                                        9.0   
+2                                        NaN   
+3                                       30.0   
+4                                        NaN   
+5                                       47.0   
+6                                        0.0   
+7                                        NaN   
+8                                        NaN   
+9                                        NaN   
+10                                       NaN   
+11                                       NaN   
+12                                      33.0   
+13                                       NaN   
+14                                      54.0   
+..                                       ...   
+485                                     59.0   
+486                                     64.0   
+487                                     69.0   
+488                                     89.0   
+489                                     98.0   
+490                                     26.0   
+491                                     72.0   
+492                                      NaN   
+493                                     70.0   
+494                                      NaN   
+495                                      NaN   
+496                                      NaN   
+497                                      NaN   
+498                                      NaN   
+499                                      NaN   
+
+     Glucose turnover rate _[per day]  Glucose turnover time_[days]  \
+0                                 NaN                           NaN   
+1                                95.0                          76.0   
+2                                98.0                          95.0   
+3                                87.0                           NaN   
+4                                 NaN                          95.0   
+5                                44.0                          73.0   
+6                                 NaN                           NaN   
+7                                89.0                           NaN   
+8                                46.0                           NaN   
+9                                53.0                           NaN   
+10                               78.0                           NaN   
+11                                NaN                          59.0   
+12                               89.0                           NaN   
+13                                NaN                           NaN   
+14                                NaN                           NaN   
+..                                ...                           ...   
+485                              77.0                          46.0   
+486                               NaN                           NaN   
+487                              25.0                           3.0   
+488                               NaN                           NaN   
+489                              16.0                           NaN   
+490                              23.0                          93.0   
+491                              87.0                           NaN   
+492                               NaN                           NaN   
+493                              42.0                           NaN   
+494                              18.0                          80.0   
+495                               NaN                           NaN   
+496                               NaN                          29.0   
+497                               NaN                           NaN   
+498                              41.0                           NaN   
+499                               NaN                           NaN   
+
+     Amino acid turnover rate _[per day]  Amino acid turnover time_[days]  \
+0                                    NaN                             70.0   
+1                                   39.0                             58.0   
+2                                    NaN                              NaN   
+3                                   90.0                              7.0   
+4                                    NaN                              NaN   
+5                                    NaN                              NaN   
+6                                   55.0                             98.0   
+7                                    NaN                              NaN   
+8                                   52.0                              NaN   
+9                                   14.0                              NaN   
+10                                  44.0                             46.0   
+11                                   NaN                             50.0   
+12                                  61.0                             56.0   
+13                                  24.0                             77.0   
+14                                  78.0                             89.0   
+..                                   ...                              ...   
+485                                  NaN                              NaN   
+486                                  NaN                             79.0   
+487                                 38.0                              NaN   
+488                                  NaN                             34.0   
+489                                  NaN                              NaN   
+490                                 28.0                              NaN   
+491                                  NaN                             30.0   
+492                                  NaN                             87.0   
+493                                  NaN                             32.0   
+494                                  NaN                              2.0   
+495                                  4.0                             71.0   
+496                                 26.0                             65.0   
+497                                  NaN                              NaN   
+498                                  NaN                              NaN   
+499                                  NaN                             59.0   
+
+     Chl a_mean chl a [µg/L]  Dissolved Inorganic Nutrients_NO X ( µM)  \
+0                       65.0                                      53.0   
+1                        NaN                                      46.0   
+2                        NaN                                      77.0   
+3                        NaN                                      71.0   
+4                       69.0                                       NaN   
+5                        NaN                                       8.0   
+6                        NaN                                       NaN   
+7                        NaN                                      74.0   
+8                        8.0                                      86.0   
+9                       16.0                                       NaN   
+10                       NaN                                      88.0   
+11                       NaN                                      43.0   
+12                      83.0                                      48.0   
+13                      32.0                                       NaN   
+14                       NaN                                      50.0   
+..                       ...                                       ...   
+485                     86.0                                       NaN   
+486                     28.0                                      83.0   
+487                      NaN                                       NaN   
+488                      4.0                                      29.0   
+489                      NaN                                       NaN   
+490                      NaN                                      63.0   
+491                     86.0                                      30.0   
+492                     34.0                                      48.0   
+493                      NaN                                       NaN   
+494                      4.0                                      38.0   
+495                      NaN                                       NaN   
+496                      NaN                                      42.0   
+497                     22.0                                       NaN   
+498                     78.0                                      96.0   
+499                      NaN                                       NaN   
+
+     NO2 ( µM )  NO3 (µM )  PO4 ( µM )  Si  ( µM )  HNA/ml  LNA/ml  \
+0           NaN        NaN         NaN        89.0    73.0     NaN   
+1          14.0       31.0         NaN        38.0    64.0    74.0   
+2           NaN        NaN        44.0        69.0    46.0     NaN   
+3          27.0       15.0         NaN         NaN    78.0     NaN   
+4          64.0        NaN         NaN         NaN     NaN    87.0   
+5          78.0       70.0         5.0         NaN     NaN    31.0   
+6           NaN        NaN        28.0        72.0    76.0     5.0   
+7          59.0       29.0         NaN        10.0    17.0    62.0   
+8           NaN        NaN         NaN         NaN     NaN     NaN   
+9          33.0       84.0        93.0         NaN     NaN     NaN   
+10         28.0        NaN        30.0         NaN     NaN     NaN   
+11         21.0        NaN        13.0        62.0     NaN    63.0   
+12         52.0        NaN         NaN        91.0    47.0    49.0   
+13         97.0        NaN        13.0        50.0     NaN     NaN   
+14         87.0        NaN        28.0         NaN     NaN     NaN   
+..          ...        ...         ...         ...     ...     ...   
+485         NaN       29.0        78.0         NaN     NaN     5.0   
+486         NaN       74.0         NaN        48.0    38.0     NaN   
+487        63.0       28.0         7.0         2.0    62.0    95.0   
+488        95.0        NaN        40.0         NaN    45.0     NaN   
+489        37.0        NaN         NaN         NaN     8.0    76.0   
+490         NaN        NaN         NaN         NaN    96.0     NaN   
+491         NaN       71.0         NaN        94.0    48.0     NaN   
+492        58.0        NaN        83.0         NaN     NaN    40.0   
+493         NaN       80.0        73.0        76.0     NaN    93.0   
+494        47.0       43.0         NaN         NaN    56.0     NaN   
+495         NaN        NaN         NaN        15.0    14.0     NaN   
+496        16.0       18.0         NaN        53.0     NaN     3.0   
+497         NaN        NaN         NaN         NaN     NaN     0.0   
+498         NaN        NaN         NaN        33.0    38.0     NaN   
+499        84.0       98.0        21.0         NaN     NaN     NaN   
+
+     Bac_size [µm]  HNA_size [µm]  LNA_size [µm]  Bac_SSC  HNA_SSC  LNA_SSC  \
+0              NaN           78.0           88.0     11.0      NaN      NaN   
+1             48.0           14.0            9.0      NaN      NaN      NaN   
+2              NaN            NaN           77.0      NaN     85.0      NaN   
+3             58.0            NaN           66.0      NaN     99.0     35.0   
+4              NaN            NaN            NaN     64.0      NaN     28.0   
+5              NaN           95.0            NaN      NaN     94.0      NaN   
+6             83.0           20.0           22.0     79.0      NaN     88.0   
+7             86.0            NaN           63.0     16.0      NaN      NaN   
+8              NaN            NaN           48.0      NaN      0.0      NaN   
+9              NaN           81.0           55.0      NaN      NaN      NaN   
+10             5.0           65.0           97.0     17.0     26.0     81.0   
+11            17.0            NaN            NaN      NaN     39.0     22.0   
+12             NaN           85.0            NaN      NaN      NaN     46.0   
+13            75.0           80.0            NaN      NaN     44.0      NaN   
+14             NaN            NaN            NaN     48.0     48.0      NaN   
+..             ...            ...            ...      ...      ...      ...   
+485            NaN            NaN            NaN      NaN      NaN      NaN   
+486           18.0           88.0           17.0     65.0      NaN      NaN   
+487            1.0            NaN           10.0      NaN     18.0     65.0   
+488           42.0            NaN           16.0      NaN      NaN      NaN   
+489            NaN            NaN           29.0     55.0     49.0      NaN   
+490            NaN           52.0           89.0     75.0      NaN      NaN   
+491            NaN            NaN            NaN      NaN      NaN      NaN   
+492            NaN           95.0           99.0      NaN      NaN     58.0   
+493            NaN            NaN            NaN     87.0     67.0      NaN   
+494           54.0            NaN           41.0     78.0     61.0      NaN   
+495            NaN            4.0           80.0      NaN      NaN     48.0   
+496           63.0           56.0            NaN     18.0      NaN     33.0   
+497           60.0           30.0           54.0     17.0      NaN      NaN   
+498            NaN           27.0           15.0     10.0      NaN      NaN   
+499            NaN           57.0            NaN      NaN     67.0      NaN   
+
+     Prokaryotes/ml  Picoplankton/ml  Nanoplankton/ml  Microplankton/ml  \
+0               NaN             59.0              NaN              55.0   
+1              34.0              NaN              NaN               NaN   
+2              42.0              2.0             11.0               NaN   
+3               NaN              NaN              NaN              35.0   
+4              47.0             35.0             43.0              60.0   
+5              95.0              NaN             23.0               NaN   
+6              23.0              NaN              NaN              28.0   
+7               NaN              NaN             66.0               NaN   
+8               NaN             52.0             50.0              38.0   
+9               NaN              NaN             39.0               NaN   
+10             83.0             23.0              NaN              52.0   
+11              NaN             91.0              NaN               NaN   
+12             87.0              NaN              NaN               NaN   
+13             47.0              5.0              NaN               NaN   
+14              NaN             51.0             44.0              48.0   
+..              ...              ...              ...               ...   
+485             NaN             26.0             39.0               NaN   
+486             NaN             35.0             81.0               NaN   
+487             NaN              NaN             30.0               NaN   
+488             NaN              0.0              NaN               NaN   
+489             NaN             91.0              2.0               NaN   
+490             NaN             64.0              NaN              80.0   
+491            57.0              NaN              NaN               NaN   
+492             NaN              NaN             97.0              42.0   
+493            96.0              NaN              NaN              25.0   
+494             NaN             96.0              NaN              85.0   
+495             NaN              NaN             57.0               NaN   
+496             NaN             50.0              4.0               NaN   
+497            60.0              NaN             75.0              63.0   
+498            62.0             80.0              NaN               NaN   
+499             NaN             61.0              NaN               NaN   
+
+     Eukaryotes/ml  Prokaryotes rel.µm  Pico rel.µm  Nano rel.µm  \
+0             71.0                31.0          NaN          NaN   
+1              NaN                87.0          NaN         54.0   
+2              NaN                 NaN          NaN          NaN   
+3             77.0                 NaN         74.0          NaN   
+4              NaN                20.0          2.0          NaN   
+5              NaN                 NaN         76.0          NaN   
+6              NaN                81.0         85.0         40.0   
+7              NaN                43.0          NaN          NaN   
+8             50.0                51.0          NaN          NaN   
+9             83.0                34.0          8.0         31.0   
+10            84.0                 NaN          NaN         87.0   
+11             NaN                69.0          NaN          NaN   
+12            60.0                32.0          NaN          NaN   
+13             NaN                50.0          NaN         80.0   
+14             NaN                28.0          4.0          NaN   
+..             ...                 ...          ...          ...   
+485            NaN                76.0         95.0         74.0   
+486           61.0                 NaN          NaN         57.0   
+487           86.0                17.0          NaN         66.0   
+488           68.0                 NaN         58.0         49.0   
+489            NaN                 NaN         40.0         17.0   
+490            NaN                 NaN          1.0          NaN   
+491            NaN                29.0         93.0          5.0   
+492            NaN                41.0         72.0          NaN   
+493            3.0                 NaN          NaN          NaN   
+494           53.0                 NaN         58.0          NaN   
+495            NaN                55.0         17.0          NaN   
+496            NaN                 NaN         25.0          NaN   
+497           90.0                94.0          NaN          NaN   
+498            1.0                47.0         47.0         40.0   
+499           58.0                69.0          NaN         21.0   
+
+     Micro rel.µm  Eukaryotes rel.µm  Prokaryotes SSC  Pico SSC  Nano SSC  \
+0             NaN               21.0              NaN       NaN       NaN   
+1            82.0                7.0              8.0      69.0      77.0   
+2            18.0                NaN              NaN       NaN      88.0   
+3             NaN                NaN              NaN      48.0       NaN   
+4            70.0               13.0             99.0      26.0       NaN   
+5             NaN               61.0             83.0       NaN       NaN   
+6             NaN                NaN              NaN      75.0      49.0   
+7             NaN               72.0             55.0       NaN       NaN   
+8             NaN                NaN              NaN      49.0      62.0   
+9             NaN                NaN             80.0      49.0      64.0   
+10           83.0                NaN             29.0      35.0      78.0   
+11           26.0               39.0              NaN       NaN       1.0   
+12           62.0                NaN             75.0       NaN      75.0   
+13           80.0               92.0             31.0       NaN      12.0   
+14            NaN               91.0              NaN       NaN       NaN   
+..            ...                ...              ...       ...       ...   
+485           NaN                NaN              NaN      69.0      11.0   
+486          15.0               31.0             79.0      22.0       NaN   
+487          93.0                NaN             91.0      98.0       NaN   
+488          27.0               32.0             25.0      73.0      31.0   
+489          55.0                NaN             58.0      10.0       NaN   
+490          55.0               51.0              NaN      51.0       NaN   
+491           NaN                NaN              NaN       NaN      75.0   
+492           NaN                8.0              NaN       NaN      31.0   
+493          84.0               27.0             19.0       NaN       NaN   
+494           NaN               62.0              NaN      27.0      86.0   
+495           NaN                NaN             61.0      58.0      42.0   
+496           NaN                NaN              5.0      27.0       NaN   
+497           NaN                NaN             80.0       NaN       NaN   
+498          51.0               55.0              NaN       NaN      79.0   
+499          26.0                NaN             51.0       NaN      45.0   
+
+     Micro  SSC  Eukaryotes SSC  Syn/ml  Proc/ml  Syn_size [µm]  \
+0          80.0            60.0    84.0     78.0           63.0   
+1           NaN            13.0     NaN     63.0           21.0   
+2          40.0             NaN     NaN      0.0            NaN   
+3          25.0             NaN    75.0     46.0            NaN   
+4           NaN             NaN    83.0     72.0            NaN   
+5           NaN            65.0     NaN     72.0            NaN   
+6           NaN            63.0     NaN      0.0            NaN   
+7           NaN            47.0    84.0      8.0            NaN   
+8          16.0             NaN     NaN     24.0            1.0   
+9          65.0             NaN     8.0      0.0           23.0   
+10          7.0            29.0     NaN      9.0            NaN   
+11          NaN             NaN    64.0     53.0            NaN   
+12         17.0            75.0     NaN     77.0            NaN   
+13          NaN            25.0     NaN     64.0            NaN   
+14          NaN            29.0     NaN     23.0           34.0   
+..          ...             ...     ...      ...            ...   
+485         NaN             0.0     NaN     42.0            NaN   
+486         2.0            55.0     NaN     16.0           40.0   
+487        41.0            93.0     NaN      0.0            NaN   
+488         NaN            65.0     NaN      0.0           25.0   
+489        23.0             5.0    53.0     27.0            2.0   
+490        32.0             NaN    86.0     68.0            NaN   
+491         NaN            62.0     NaN     72.0            NaN   
+492        40.0             NaN     NaN     15.0            NaN   
+493         NaN             NaN    25.0      0.0           91.0   
+494         NaN             NaN     NaN     87.0           77.0   
+495         NaN             NaN    95.0     89.0            NaN   
+496        28.0             NaN     NaN      0.0           58.0   
+497         NaN             NaN    88.0      0.0            NaN   
+498        91.0            57.0    58.0     69.0           61.0   
+499        82.0            92.0    90.0      0.0            NaN   
+
+     Proc_size [µm]  Syn SSC  Proc SSC  TPN[µg/l]  POC [µg/l]  Growth rate  
+0               0.0      NaN      91.0       92.0         NaN     0.038508  
+1              68.0     33.0      55.0       10.0         NaN     0.077016  
+2              77.0      NaN      77.0        NaN         NaN          NaN  
+3               0.0     12.0       0.0        NaN         NaN     0.023105  
+4               1.0      NaN       0.0        NaN         NaN          NaN  
+5               0.0     61.0       4.0        NaN        80.0     0.014748  
+6              15.0     64.0       0.0        NaN        71.0          inf  
+7               0.0      NaN       0.0        NaN         NaN          NaN  
+8               0.0     30.0       0.0       68.0        95.0          NaN  
+9               0.0      NaN      59.0       81.0         NaN          NaN  
+10             92.0     20.0       2.0        NaN        27.0          NaN  
+11              0.0      NaN       0.0       28.0        28.0          NaN  
+12              0.0     14.0      80.0       46.0        21.0     0.021004  
+13              0.0     97.0       0.0        0.0         NaN          NaN  
+14             83.0      NaN       0.0        NaN        35.0     0.012836  
+..              ...      ...       ...        ...         ...          ...  
+485             0.0      NaN       0.0       50.0        32.0          NaN  
+486             1.0      NaN      95.0        NaN         NaN          NaN  
+487            51.0     81.0      34.0        NaN        47.0          NaN  
+488            93.0      NaN      76.0       80.0         NaN          NaN  
+489             0.0     25.0      80.0        NaN         NaN          NaN  
+490             0.0      NaN      81.0       58.0         3.0     0.063013  
+491            69.0     37.0      70.0        NaN        39.0          NaN  
+492            59.0      NaN      77.0       97.0        60.0          NaN  
+493            46.0     90.0      52.0       74.0        30.0     0.007001  
+494            51.0     94.0      39.0        NaN         NaN          NaN  
+495            49.0      NaN       0.0        NaN         NaN     0.009627  
+496            24.0     92.0      70.0       84.0         NaN          NaN  
+497             0.0     62.0       2.0        NaN        36.0          NaN  
+498            52.0      NaN       5.0        NaN         NaN     0.693147  
+499             0.0      6.0      70.0        3.0         NaN     0.010502  
+
+[500 rows x 58 columns]
+Name of the mergefile (csv): dummymerge.csv 
