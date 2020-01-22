@@ -91,9 +91,9 @@ print "What can this merger do? \n \
 print " What cannot this merger do?\n \
  - It cannot handle different table structures. Headers should have the same structure as well,\n \
  - To reduce resetting, it is recommended to have identical headers in every table,\n \
- - It can be problematic to merge and manually set the parameters for hundreds of tables, or really noisiy ones. It is recommended to do the merge with subsets, then merge them together \n
- - Unique columns with no common match in all input tables will be dropped at the end step, \n
- - It takes what it gets. For instance, when a CSV table is exported, digits can be lost. Before running this merger, make sure you exported your tables right! \n"
+ - It can be problematic to merge and manually set the parameters for hundreds of tables, or really noisiy ones. It is recommended to do the merge with subsets, then merge them together,\n \
+ - Unique columns with no common match in all input tables will be dropped at the end step,\n \
+ - It takes what it gets. For instance, when a CSV table is exportedfrom Libreoffice, digits can be lost. Before running this merger, make sure you exported your tables right! \n"
 
 print "If you feel like you made a mistake, no worries! Just break out by hitting ctrl + c!\n"
 print "Let's begin!"
@@ -239,4 +239,4 @@ except:
 
 mergetable.to_csv(output, index=False, header= True)
 #df.types
-print "\nGut gemacht!""
+print "\nGut gemacht!"
