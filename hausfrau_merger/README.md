@@ -41,3 +41,6 @@ python data_cleanup_hausfrau.py
 
 First it asks for your files one by one. Next it will ask for defining your headers, then checks the tables one by one for dupicated and unnecessary rows and offers optional editing. At the end all matching columns will be concatenated to a final table.
 If you are not sure how to use it, please check the testrun.txt file!
+## Have questions or suggestions?
+Please contact me at emese.szabo@uni-oldenburg.de!
+If you experience bugs or errors, please send me your output message of your terminal, optionally the first 10 lines of your files!
