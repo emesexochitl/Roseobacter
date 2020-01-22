@@ -35,7 +35,8 @@ The merger depends on the following Python packages:
  * unique columns with no common match in all input tables will be dropped at the end step
  * it takes what it gets. For instance, when a CSV table is exported from Libreoffice, digits can be lost. Before running this merger, make sure you exported your tables right!
  ## How to use:
-The merger operates on an interactive way. to run it, just type into your terminal:
+The merger operates on an interactive way. To run it, just type into your terminal:
+
 python data_cleanup_hausfrau.py
 
 First it asks for your files one by one. Next it will ask for defining your headers, then checks the tables one by one for dupicated and unnecessary rows and offers optional editing. At the end all matching columns will be concatenated to a final table.
