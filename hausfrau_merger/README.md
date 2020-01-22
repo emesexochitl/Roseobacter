@@ -27,11 +27,12 @@ The merger depends on the following Python packages:
 * and finally, it will merge your tables into one final CSV output, based on the columns represented in all your tables,
 * you can choose the name of the output file.
 ## Limitations:
- * It cannot handle different table structures. Headers should have the same structure as well,
- * To reduce resetting, it is recommended to have identical headers in every table,
- * It can be problematic to merge and manually set the parameters for hundreds of tables, or really noisiy ones. It is recommended to do the merge with subsets, then merge them together,
- * Unique columns with no common match in all input tables will be dropped at the end step
- * It takes what it gets. For instance, when a CSV table is exported from Libreoffice, digits can be lost. Before running this merger, make sure you exported your tables right!
+ * Handling categorical data is not solved yet,
+ * it cannot handle different table structures. Headers should have the same structure as well,
+ * to reduce resetting, it is recommended to have identical headers in every table,
+ * it can be problematic to merge and manually set the parameters for hundreds of tables, or really noisiy ones. It is recommended to do the merge with subsets, then merge them together,
+ * unique columns with no common match in all input tables will be dropped at the end step
+ * it takes what it gets. For instance, when a CSV table is exported from Libreoffice, digits can be lost. Before running this merger, make sure you exported your tables right!
  ## How to use:
  The merger operates on an interactive way. First it asks for your files one by one. Next it will ask for defining your headers, then checks the tables one by one for dupicated and unnecessary rows and offers optional editing. At the end all matching columns will be concatenated to a final table.
 If you are not sure how to use it, please check the testrun.txt file!
