@@ -1,12 +1,11 @@
 #!/usr/bin/env/python
 
-
 # Merging more or less similar CSV format files for later imputation/clustering.
 
 # Details:
 # title           :data_cleanup_hausfrau_merge.py
 # author          :Emese Xochitl Szabo
-# email:		 :emese.szabo@uni-oldenburg.de
+# email:	  :emese.szabo@uni-oldenburg.de
 # date            :27/01/2020
 # version         :0.1
 # license         :GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
