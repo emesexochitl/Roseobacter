@@ -1,4 +1,23 @@
-#!/usr/bin/python
+#!/usr/bin/env/python
+
+
+# Merging more or less similar CSV format files for later imputation/clustering.
+
+# Details:
+# title           :data_cleanup_hausfrau_merge.py
+# author          :Emese Xochitl Szabo
+# email:		 :emese.szabo@uni-oldenburg.de
+# date            :27/01/2020
+# version         :0.1
+# license         :GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
+# usage           :python data_cleanup_hausfrau_merge.py
+# notes           :
+# python_version  :2.7.16
+
+# Follow the interactive instructions: first a modified header will show your columns, their names, index number,
+# and the first 5 rows. Duplicate removal, optional dropping and calculations will be based on the index numbers!
+
+# Every contibution is welcome! To do so please fork the  hausfrau_merger on GitHub, create your chnages locally, and  send a pull request!
 
 import datetime
 import operator
@@ -13,6 +32,7 @@ import difflib
 import fuzzywuzzy
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
+
 
 now = datetime.datetime.now()
 
