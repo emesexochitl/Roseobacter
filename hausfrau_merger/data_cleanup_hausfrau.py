@@ -3,20 +3,20 @@
 # Merging more or less similar CSV format files for later imputation/clustering.
 
 # Details:
-# title           :data_cleanup_hausfrau_merge.py
-# author          :Emese Xochitl Szabo
-# email:	  :emese.szabo@uni-oldenburg.de
-# date            :27/01/2020
-# version         :0.1
-# license         :GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
-# usage           :python data_cleanup_hausfrau_merge.py
+# title           : data_cleanup_hausfrau_merge.py
+# author          : Emese Xochitl Szabo
+# email     	  : emese.szabo@uni-oldenburg.de
+# date            : 27/01/2020
+# version         : 0.1
+# license         : GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
+# usage           : python data_cleanup_hausfrau_merge.py
 # notes           :
-# python_version  :2.7.16
+# python_version  : 2.7.16
 
 # Follow the interactive instructions: first a modified header will show your columns, their names, index number,
 # and the first 5 rows. Duplicate removal, optional dropping and calculations will be based on the index numbers!
 
-# Every contibution is welcome! To do so please fork the  hausfrau_merger on GitHub, create your chnages locally, and  send a pull request!
+# Every contibution is welcome! To do so please fork the  hausfrau_merger on GitHub, create your changes locally, and  send a pull request!
 
 import datetime
 import operator
@@ -157,7 +157,7 @@ for obj in objects:
             print  "\nDuplicated columns were detected in case of ", key, value, "\n"
             answer=raw_input("Would you like to delete duplicated columns? Please answer Yes or No! ").lower()
             if answer=="yes":
-                print "The following duplicated columns were found. Which one would you like to keep?"
+                print "The following duplicated columns were found."
                 print obj.tableindex[~(obj.tableindex != key)].dropna(how="all", axis=[0,1])   # indexes and dup. names in 
                 print "Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!"
                 for line in iter(raw_input, sentinel):
