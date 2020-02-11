@@ -12,7 +12,7 @@ The merger depends on the following Python packages:
 * itertools
 * collections
 * difflib
-* fuzzywuzzy 
+* fuzzywuzzy - if it is not installed, try pip install fuzzywuzzy
 ## Functions:
 * it loads your CSV tables one by one,
 * keeps your column names, even with special characters,
