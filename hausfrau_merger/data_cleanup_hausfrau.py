@@ -3,20 +3,20 @@
 # Merging more or less similar CSV format files for later imputation/clustering.
 
 # Details:
-# title           : data_cleanup_hausfrau_merge.py
-# author          : Emese Xochitl Szabo
-# email     	  : emese.szabo@uni-oldenburg.de
-# date            : 27/01/2020
-# version         : 0.1
-# license         : GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
-# usage           : python data_cleanup_hausfrau_merge.py
+# title           :data_cleanup_hausfrau_merge.py
+# author          :Emese Xochitl Szabo
+# email:	  :emese.szabo@uni-oldenburg.de
+# date            :27/01/2020
+# version         :0.1
+# license         :GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
+# usage           :python data_cleanup_hausfrau_merge.py
 # notes           :
-# python_version  : 2.7.16
+# python_version  :2.7.16
 
 # Follow the interactive instructions: first a modified header will show your columns, their names, index number,
 # and the first 5 rows. Duplicate removal, optional dropping and calculations will be based on the index numbers!
 
-# Every contibution is welcome! To do so please fork the  hausfrau_merger on GitHub, create your changes locally, and  send a pull request!
+# Every contibution is welcome! To do so please fork the  hausfrau_merger on GitHub, create your chnages locally, and  send a pull request!
 
 import datetime
 import operator
@@ -39,21 +39,22 @@ print now
 
 class load_data():
 
-    def __init__(self,input,rows):
+    def __init__(self,input,rows,delim):
         self.loadfile = input
         self.rows = rows
+        self.delim=delim
         self.load_table()
 
     def load_table(self):
 
         if len(self.rows) > 1:
 
-            self.loadlist = pd.read_csv(self.loadfile, header=rows)
+            self.loadlist = pd.read_csv(self.loadfile, header=self.rows, sep=self.delim)
             self.loadlist.columns = self.loadlist.columns.map('_'.join)
             self.loadlist = self.loadlist.replace(r'^\s*$', np.nan, regex=True)
             self.loadlist = self.loadlist.dropna(how="all", axis=[0,1])
             self.loadlist = self.loadlist.T.drop_duplicates().T
-            self.loadlist = self.loadlist.replace('\W', '', regex=True).convert_objects(convert_numeric=True) # TEST! #
+            #self.loadlist = self.loadlist.replace('\W', '', regex=True).convert_objects(convert_numeric=True) # TEST! #
 
             self.loadlist.columns = self.loadlist.columns.str.strip().str.replace('Unnamed: \d+_level_\d+_', '') # when there is no other name, it will retain this. Later at the matching, it will be offered to be merged.
             self.columns = self.loadlist.columns
@@ -68,11 +69,13 @@ class load_data():
             self.visual = self.visual.sort_index()
 
         else:
-            self.loadlist = pd.read_csv(self.loadfile, header=rows)
+            self.loadlist = pd.read_csv(self.loadfile, header=rows, sep =delim)
             self.loadlist = self.loadlist.replace(r'^\s*$', np.nan, regex=True)
             self.loadlist = self.loadlist.dropna(how="all", axis=[0,1])
+            self.loadlist = self.loadlist.T.drop_duplicates().T
             self.loadlist.columns = self.loadlist.columns.str.strip().str.replace('Unnamed: \d+_level_\d+_', '') # when there is no other name, it will retain this. Later at the matching, it will be offered to be me$
-            self.loadlist = self.loadlist.replace('\W', '', regex=True).convert_objects(convert_numeric=True)
+            #self.loadlist = self.loadlist.replace('\W', '', regex=True).convert_objects(convert_numeric=True)
+
             self.columns = self.loadlist.columns
             self.tableindex = pd.DataFrame(columns=range(len(self.columns)), index=[0])
             self.tableindex.loc[0] = self.loadlist.columns 
@@ -95,7 +98,7 @@ print "Welcome to the Hausfrau merger. This program will help you to clean and c
 #print recommendations
 
 print "What can this merger do? \n \
-- it loads your CSV tables one by one,\n \
+- it loads your comma or, tab-separated tables one by one,\n \
 - keeps your column names, even with special characters,\n \
 - checks column formatting,\n \
 - deletes empty rows and columns,\n \
@@ -130,8 +133,11 @@ The first 2 rows of headers would be 0 and 2 , the first 3 rows of headers would
 row_start = raw_input("Your header starts at: ")
 row_end = raw_input("Your header ends at: ")
 
+print "Please define your field separator (tabulator is \\t, comma is ,):"
+delim = raw_input("Your delimiter is: ")
+
 rows = range(int(row_start),int(row_end))
-objects = [load_data(input,rows) for input in inputs]
+objects = [load_data(input,rows,delim) for input in inputs]
 pd.set_option('display.max_rows', 30)
 tables = [obj.loadlist for obj in objects]
 allcols = []
@@ -157,7 +163,7 @@ for obj in objects:
             print  "\nDuplicated columns were detected in case of ", key, value, "\n"
             answer=raw_input("Would you like to delete duplicated columns? Please answer Yes or No! ").lower()
             if answer=="yes":
-                print "The following duplicated columns were found."
+                print "The following duplicated columns were found. Which one would you like to keep?"
                 print obj.tableindex[~(obj.tableindex != key)].dropna(how="all", axis=[0,1])   # indexes and dup. names in 
                 print "Please type the index numbers of the colums to be dropped. Once you are ready, hit Enter!"
                 for line in iter(raw_input, sentinel):
@@ -240,6 +246,8 @@ for obj in objects:
     #correction
     obj.loadlist = obj.loadlist.rename(columns=matchlist)
     newcols.append(obj.loadlist.columns)
+    #duplicate rows?
+    obj.loadlist =  obj.loadlist.drop_duplicates()
 
 newcols2 = list(chain.from_iterable(newcols))
 newcounts = Counter(newcols2)
