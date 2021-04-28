@@ -14,7 +14,7 @@ The merger depends on the following Python packages:
 * difflib
 * fuzzywuzzy - if it is not installed, try pip install fuzzywuzzy
 ## Functions:
-* it loads your CSV tables one by one,
+* it loads your CSV or TXT tables one by one,
 * keeps your column names, even with special characters,
 * checks column formatting,
 * deletes whitespaces,
