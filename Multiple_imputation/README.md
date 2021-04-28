@@ -36,5 +36,5 @@ To perform the multiple imputation, the method ... of missMDA is used, but the c
 ## Limitations:
  * It is only been tested for R 3.6.3
  * Usually imputing missing values more than 20 % will lead less trustworthy results. Handle it with precaution!
- * 
+ * It was only tested for the subproject, where different data tables were imputed one by one, then merged to one table (see the Hausfrau folder)
  * 
