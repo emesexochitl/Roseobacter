@@ -6,8 +6,8 @@
 # title           :data_cleanup_hausfrau_merge.py
 # author          :Emese Xochitl Szabo
 # email:	  :emese.szabo@uni-oldenburg.de
-# date            :27/01/2020
-# version         :0.1
+# date            :15/02/2021
+# version         :0.2
 # license         :GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
 # usage           :python data_cleanup_hausfrau_merge.py
 # notes           :
@@ -54,7 +54,7 @@ class load_data():
             self.loadlist = self.loadlist.replace(r'^\s*$', np.nan, regex=True)
             self.loadlist = self.loadlist.dropna(how="all", axis=[0,1])
             self.loadlist = self.loadlist.T.drop_duplicates().T
-            #self.loadlist = self.loadlist.replace('\W', '', regex=True).convert_objects(convert_numeric=True) # TEST! #
+            #self.loadlist = self.loadlist.replace('\W', '', regex=True).convert_objects(convert_numeric=True) # Removes formatting, has to be tested!
 
             self.loadlist.columns = self.loadlist.columns.str.strip().str.replace('Unnamed: \d+_level_\d+_', '') # when there is no other name, it will retain this. Later at the matching, it will be offered to be merged.
             self.columns = self.loadlist.columns
@@ -74,7 +74,7 @@ class load_data():
             self.loadlist = self.loadlist.dropna(how="all", axis=[0,1])
             self.loadlist = self.loadlist.T.drop_duplicates().T
             self.loadlist.columns = self.loadlist.columns.str.strip().str.replace('Unnamed: \d+_level_\d+_', '') # when there is no other name, it will retain this. Later at the matching, it will be offered to be me$
-            #self.loadlist = self.loadlist.replace('\W', '', regex=True).convert_objects(convert_numeric=True)
+            #self.loadlist = self.loadlist.replace('\W', '', regex=True).convert_objects(convert_numeric=True) # Removes formatting, hast to be tested!
 
             self.columns = self.loadlist.columns
             self.tableindex = pd.DataFrame(columns=range(len(self.columns)), index=[0])
