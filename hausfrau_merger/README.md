@@ -28,6 +28,7 @@ The merger depends on the following Python packages:
 * and finally, it will merge your tables into one final CSV output, based on the columns represented in all your tables,
 * you can choose the name of the output file.
 ## Limitations:
+ * It is only been tested for Python 2.7
  * Handling categorical data is not solved yet,
  * it cannot handle different table structures. Headers should have the same structure as well,
  * to reduce resetting, it is recommended to have identical headers in every table,
