@@ -38,15 +38,23 @@ To perform the multiple imputation, the method of performing principal component
 
 Second, multiple imputation is performed on nonscaled data, then on scaled data. This includes estimating the  number of dimensions used in the reconstruction formula, then generate the imputed data sets with the MIPCA function using the number of dimensions previously calculated, finally plot the results:
 
-* Min-Max normlization
-* In the last part of the R script, several ordination methods are included, as an alternative to analyze ecological data sets
+* Combination plot: pattern visualization of missing and imputed values
+
+![combinations](https://user-images.githubusercontent.com/14163953/116693905-d48fb400-a9be-11eb-997c-60a0b8f8da29.png)
+
+* Correlation matrix plots: visualize positive pairwise correlations of values (negative correlations are not trustworthy!). They come in "upper", "hclust" and "mixed" versions.
+
+![corrplot_mixed](https://user-images.githubusercontent.com/14163953/116694281-613a7200-a9bf-11eb-955f-7f38aa90b40c.png)
+![corrplot_hclust](https://user-images.githubusercontent.com/14163953/116694286-61d30880-a9bf-11eb-8bda-67d989a33bea.png)
+![corrplot_upper](https://user-images.githubusercontent.com/14163953/116694288-626b9f00-a9bf-11eb-9c1c-1b4411655f1d.png)
+
+
+It is important to note for the scaled data imputation that Min-Max normlization is performed. It is based on the fact that most datasets are not normally distributed and this way of normalization provides upper and lower boundaries.
+
+In the last part of the R script, several ordination methods are included, as an alternative to analyze ecological data sets
+
 * Visualizations
-* 
-* 
-* 
-* 
-* 
-* 
+ 
 
 ## Limitations:
  * It is only been tested for R 3.6.3
