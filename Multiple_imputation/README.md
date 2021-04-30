@@ -1,7 +1,7 @@
 ## Missing values? Here is how to find and use them!
 When one works with complex data tables coming from various resources, mistakes and errors can happen. Sometimes it is manifesting in missing values and in order to save as much valuable measurement as possible, one can use multiple imputation.
 ## Dependencies:
-To perform the multiple imputation, the method ... of missMDA is used, but the complete script depends on more packages:
+To perform the multiple imputation, the method of performing principal component methods on incomplete data to estimate parameters of missMDA is used, but the complete script depends on more packages:
 * ggplot2
 * lattice
 * reshape2
@@ -20,11 +20,11 @@ To perform the multiple imputation, the method ... of missMDA is used, but the c
 * tibble
 
 ## Functions:
-* First, some analytics are performed: normality-check, missing value co-occurrence, ... These measurements will help to better understand the data and help to make good choices later. .. are visulaized as well
-* Sesonf, multiple imputation is performed on nonscaled data, then on scaled data
+* First, some analytics are performed: normality-check, missing value co-occurrence, ... These measurements will help to better understand the data and help to make good choices later. .. are visualized as well
+* Second, multiple imputation is performed on nonscaled data, then on scaled data
 * Min-Max normlization
 * In the last part of the R script, several ordination methods are included, as an alternative to analyze ecologivcal data sets
-* 
+* Visualizations
 * 
 * 
 * 
