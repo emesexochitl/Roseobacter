@@ -25,8 +25,10 @@ To perform the multiple imputation, the method of performing principal component
 
 ## Functions:
  Table is loaded and formatted (check hidden characters, select and reformat samples)
- Analytics are performed: normality-check, missing value co-occurrence, ... These measurements will help to better understand the data and help to make good choices later. .. are visualized as well
-* normality plot
+ Analytics are performed: normality-check, missing value co-occurrence, ... These measurements will help to better understand the data and help to make good choices later. These steps are visualized as well:
+ 
+* Normality plot
+
 ![normality_plot](https://user-images.githubusercontent.com/14163953/116690671-03eff200-a9ba-11eb-9b45-f129ad2070bc.png)
 
 * Second, multiple imputation is performed on nonscaled data, then on scaled data
