@@ -36,9 +36,10 @@ To perform the multiple imputation, the method of performing principal component
 ![matrixplot](https://user-images.githubusercontent.com/14163953/116692086-1a974880-a9bc-11eb-87c0-7dfdbbb4d4cf.png)
 
 
-* Second, multiple imputation is performed on nonscaled data, then on scaled data
+Second, multiple imputation is performed on nonscaled data, then on scaled data. This includes estimating the  number of dimensions used in the reconstruction formula, then generate the imputed data sets with the MIPCA function using the number of dimensions previously calculated, finally plot the results:
+
 * Min-Max normlization
-* In the last part of the R script, several ordination methods are included, as an alternative to analyze ecologivcal data sets
+* In the last part of the R script, several ordination methods are included, as an alternative to analyze ecological data sets
 * Visualizations
 * 
 * 
