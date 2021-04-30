@@ -31,7 +31,7 @@ To perform the multiple imputation, the method of performing principal component
 
 ![normality_plot](https://user-images.githubusercontent.com/14163953/116690671-03eff200-a9ba-11eb-9b45-f129ad2070bc.png)
 
-* Matrix plot: visualizing missing values co-occurrences. Missing values are markes as red, and can indicate systematic errors.
+* Matrix plot: visualizing missing values co-occurrences. Missing values are marked as red, and can indicate systematic errors.
 
 ![matrixplot](https://user-images.githubusercontent.com/14163953/116692086-1a974880-a9bc-11eb-87c0-7dfdbbb4d4cf.png)
 
