@@ -52,7 +52,8 @@ Second, multiple imputation is performed on nonscaled data, then on scaled data.
 
 * Heatmap: interactive correlation matrix plot with dendrogram.
 
-![interactive_corrplot](https://user-images.githubusercontent.com/14163953/116696390-238b1880-a9c2-11eb-9010-5b6770ae08df.png)
+![interctive_corrplot](https://user-images.githubusercontent.com/14163953/116696945-d3608600-a9c2-11eb-8db6-2e5e164fbed3.png)
+
 
 
 It is important to note for the scaled data imputation that Min-Max normlization is performed. It is based on the fact that most datasets are not normally distributed(see previous Shapiro-test) and this way of normalization provides upper and lower boundaries.
