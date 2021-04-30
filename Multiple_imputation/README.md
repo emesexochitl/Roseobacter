@@ -24,12 +24,17 @@ To perform the multiple imputation, the method of performing principal component
 * tidyverse
 
 ## Functions:
- Table is loaded and formatted (check hidden characters, select and reformat samples)
+ First, the table is loaded and formatted (check hidden characters, select and reformat samples)
  Analytics are performed: normality-check, missing value co-occurrence, ... These measurements will help to better understand the data and help to make good choices later. These steps are visualized as well:
  
-* Normality plot
+* Normality plot: value distributions
 
 ![normality_plot](https://user-images.githubusercontent.com/14163953/116690671-03eff200-a9ba-11eb-9b45-f129ad2070bc.png)
+
+* Matrix plot: visualizing missing values co-occurrences. Missing values are markes as red, and can indicate systematic errors.
+
+![matrixplot](https://user-images.githubusercontent.com/14163953/116692086-1a974880-a9bc-11eb-87c0-7dfdbbb4d4cf.png)
+
 
 * Second, multiple imputation is performed on nonscaled data, then on scaled data
 * Min-Max normlization
