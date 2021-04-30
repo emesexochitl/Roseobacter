@@ -45,9 +45,9 @@ Second, multiple imputation is performed on nonscaled data, then on scaled data.
 * Correlation matrix plots: visualize positive pairwise correlations of values (negative correlations are not trustworthy!). They come in "upper", "hclust" and "mixed" versions.
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/14163953/116694281-613a7200-a9bf-11eb-955f-7f38aa90b40c.png" width="250" height="250" />
-<img src="https://user-images.githubusercontent.com/14163953/116694286-61d30880-a9bf-11eb-8bda-67d989a33bea.png" width="250" height="250" />
-<img src="https://user-images.githubusercontent.com/14163953/116694288-626b9f00-a9bf-11eb-9c1c-1b4411655f1d.png" width="250" height="250" />
+<img src="https://user-images.githubusercontent.com/14163953/116694281-613a7200-a9bf-11eb-955f-7f38aa90b40c.png" />
+<img src="https://user-images.githubusercontent.com/14163953/116694286-61d30880-a9bf-11eb-8bda-67d989a33bea.png" />
+<img src="https://user-images.githubusercontent.com/14163953/116694288-626b9f00-a9bf-11eb-9c1c-1b4411655f1d.png" />
 </p>
 
 
