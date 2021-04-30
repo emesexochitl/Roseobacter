@@ -25,9 +25,9 @@ To perform the multiple imputation, the method of performing principal component
 
 ## Functions:
  First, the table is loaded and formatted (check hidden characters, select and reformat samples)
- Analytics are performed: normality-check, missing value co-occurrence, ... These measurements will help to better understand the data and help to make good choices later. These steps are visualized as well:
+ Analytics are performed: normality-check (Shapiro-test), missing value co-occurrence, ... These measurements will help to better understand the data and help to make good choices later. These steps are visualized as well:
  
-* Normality plot: value distributions
+* Normality plot: value distributions.
 
 ![normality_plot](https://user-images.githubusercontent.com/14163953/116690671-03eff200-a9ba-11eb-9b45-f129ad2070bc.png)
 
@@ -38,20 +38,24 @@ To perform the multiple imputation, the method of performing principal component
 
 Second, multiple imputation is performed on nonscaled data, then on scaled data. This includes estimating the  number of dimensions used in the reconstruction formula, then generate the imputed data sets with the MIPCA function using the number of dimensions previously calculated, finally plot the results:
 
-* Combination plot: pattern visualization of missing and imputed values
+* Combination plot: pattern visualization of missing and imputed values.
 
 ![combinations](https://user-images.githubusercontent.com/14163953/116693905-d48fb400-a9be-11eb-997c-60a0b8f8da29.png)
 
-* Correlation matrix plots: visualize positive pairwise correlations of values (negative correlations are not trustworthy!). They come in "upper", "hclust" and "mixed" versions.
+* Correlation matrix plots: visualize positive pairwise correlations of values (negative correlations are not trustworthy!). They come in "upper", "hclust" and "mixed" flavors.
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/14163953/116694281-613a7200-a9bf-11eb-955f-7f38aa90b40c.png" width="250" height="auto" />
-<img src="https://user-images.githubusercontent.com/14163953/116694286-61d30880-a9bf-11eb-8bda-67d989a33bea.png"  width="250" height="auto" />
-<img src="https://user-images.githubusercontent.com/14163953/116694288-626b9f00-a9bf-11eb-9c1c-1b4411655f1d.png"  width="250" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/116694281-613a7200-a9bf-11eb-955f-7f38aa90b40c.png" width="300" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/116694286-61d30880-a9bf-11eb-8bda-67d989a33bea.png"  width="300" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/116694288-626b9f00-a9bf-11eb-9c1c-1b4411655f1d.png"  width="300" height="auto" />
 </p>
 
+* Heatmap: interactive correlation matrix plot with dendrogram.
 
-It is important to note for the scaled data imputation that Min-Max normlization is performed. It is based on the fact that most datasets are not normally distributed and this way of normalization provides upper and lower boundaries.
+![interactive_corrplot](https://user-images.githubusercontent.com/14163953/116696390-238b1880-a9c2-11eb-9010-5b6770ae08df.png)
+
+
+It is important to note for the scaled data imputation that Min-Max normlization is performed. It is based on the fact that most datasets are not normally distributed(see previous Shapiro-test) and this way of normalization provides upper and lower boundaries.
 
 In the last part of the R script, several ordination methods are included, as an alternative to analyze ecological data sets
 
