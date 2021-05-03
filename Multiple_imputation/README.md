@@ -8,7 +8,7 @@ To perform the multiple imputation, the method of performing principal component
 * naniar
 * missMDA
 * FactoMineR
-* WIM
+* VIM
 * factoextra
 * corrplot
 * data.table
