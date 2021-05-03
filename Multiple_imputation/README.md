@@ -64,7 +64,7 @@ In the last part of the R script, several ordination methods are included, as an
 ## Limitations:
  * It is only been tested for R 3.6.3
  * Usually imputing missing values more than 20 % will lead less trustworthy results. Handle it with precaution!
- * It was only tested for the subproject, where different data tables were imputed one by one, then merged to one table (see the Hausfrau folder)
- * 
+ * It was only tested for the subproject, where different data tables were imputed one by one, Min-Max normalized, then merged to one table (see the Hausfrau folder)
+ 
 ## Resources:
 Josse J, Husson F (2016). “missMDA: A Package for Handling Missing Values in Multivariate Data Analysis.” Journal of Statistical Software, 70(1), 1–31. doi: 10.18637/jss.
