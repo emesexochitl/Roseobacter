@@ -24,8 +24,7 @@ To perform the multiple imputation, the method of performing principal component
 * tidyverse
 
 ## Functions:
- First, the table is loaded and formatted (check hidden characters, select and reformat samples)
- Analytics are performed: normality-check (Shapiro-test), missing value co-occurrence, ... These measurements will help to better understand the data and help to make good choices later. These steps are visualized as well:
+ First, the table is loaded and formatted (check hidden characters, select and reformat samples), then analytics are performed: normality-check (Shapiro-test) and  missing value co-occurrence.These measurements will help to better understand the data and help to make good choices later. These steps are visualized as well:
  
 * Normality plot: value distributions.
 
