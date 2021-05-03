@@ -59,10 +59,7 @@ Second, multiple imputation is performed on scaled data for visualization purpos
 
 After that, multiple imputation is repeated on nonscale data, for one type of ooutput. However, it is important to note for the scaled data imputation that Min-Max normlization is performed. It is based on the fact that most datasets are not normally distributed(see previous Shapiro-test) and this way of normalization provides upper and lower boundaries.
 
-In the last part of the R script, several ordination methods are included, as an alternative to analyze ecological data sets
-
-* Visualizations
- 
+In the last part of the R script, several ordination methods are included, as an alternative to analyze ecological data sets. They weren't tested for this project.
 
 ## Limitations:
  * It is only been tested for R 3.6.3
