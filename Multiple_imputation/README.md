@@ -53,9 +53,13 @@ Second, multiple imputation is performed on scaled data for visualization purpos
 
 ![interctive_corrplot](https://user-images.githubusercontent.com/14163953/116696945-d3608600-a9c2-11eb-8db6-2e5e164fbed3.png)
 
-* Multiple imputation plots: they show  the procrustean representation of the individuals, dimensions of the PCA, projection of the individuals as supplementary individuals and the projection of the variables as supplementary variables, in this order. Pay attention to the amount of imputed values and inertia on the plots!
+* Multiple imputation plots: they show  the procrustean representation of the individuals, dimensions of the PCA and the projection of the variables as supplementary variables, in this order. Pay attention to the amount of imputed values and inertia on the plots!
 
-
+<p float="left">
+<img src="https://user-images.githubusercontent.com/14163953/117017372-d5448500-acf3-11eb-8721-722d27b3816e.jpg" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117017367-d4abee80-acf3-11eb-9f9d-772675c7c360.jpg"  width="300" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117017352-d1b0fe00-acf3-11eb-8d33-b546390cdc9a.jpg"  width="300" height="auto" />
+</p>
 
 After that, multiple imputation is repeated on nonscale data, for one type of output. However, it is important to note for the later analysis for TDA  that Min-Max normlization was performed on nonscaled data. The main reason was to be able to compare different samplings of origin. Choorsing the Min-MAx normalization comes in handy when datasets are not normally distributed (see previous Shapiro-test) and this way of normalization provides upper and lower boundaries.
 
