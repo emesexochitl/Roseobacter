@@ -61,7 +61,7 @@ Second, multiple imputation is performed on scaled data for visualization purpos
 <img src="https://user-images.githubusercontent.com/14163953/117017352-d1b0fe00-acf3-11eb-8d33-b546390cdc9a.jpg"  width="300" height="auto" />
 </p>
 
-After that, multiple imputation is repeated on nonscale data, for one type of output. However, it is important to note for the later analysis for TDA  that Min-Max normlization was performed on nonscaled data. The main reason was to be able to compare different samplings of origin. Choorsing the Min-MAx normalization comes in handy when datasets are not normally distributed (see previous Shapiro-test) and this way of normalization provides upper and lower boundaries.
+After that, multiple imputation is repeated on nonscale data, for one type of output. However, it is important to note for TDA Min-Max normalization was performed on imputed, nonscaled data. The main reason was to be able to compare different samplings of origin. Choosing the Min-Max normalization comes in handy when datasets are not normally distributed (see previous Shapiro-test) and this way of normalization provides upper and lower boundaries.
 
 In the last part of the R script, several ordination methods are included, as an alternative to analyze ecological data sets. They weren't tested for this project.
 
@@ -72,3 +72,5 @@ In the last part of the R script, several ordination methods are included, as an
  
 ## Resources:
 Josse J, Husson F (2016). “missMDA: A Package for Handling Missing Values in Multivariate Data Analysis.” Journal of Statistical Software, 70(1), 1–31. doi: 10.18637/jss.
+https://datasharkie.com/how-to-normalize-data-in-r/
+https://www.codecademy.com/articles/normalization
