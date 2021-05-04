@@ -9,7 +9,7 @@
 # license         :GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
 # usage           :Rscript data_cleanup_hausfrau_merge.py
 # notes           :better run in Rstudio and modify to the unique needs (see most commented lines)
-# r_version  :
+# r_version       :R.3.6.3
 
 
 library("ggplot2")
@@ -32,38 +32,39 @@ library(tibble)
 library(gtools)
 library(vegan3d)
 library(divo)
+library(tidyverse)
+
 #setwd("") <- working library
 pdf("Meinhard_eco_pacific_scaled.pdf")  
 roseo_full <- read.csv("Meta_Data_Pacific_Comparison.txt", header = T,sep="\t",as.is = T, fileEncoding="UTF-8", check.names = F) # problems with rownames - water depth inaccurate
 roseo_full <- roseo_full %>% filter(str_detect(Sample_ID, "DV", negate = TRUE)) # for the special Deep Vienna samples
 roseo_full$Size_Fraction <- as.numeric(roseo_full$Size_Fraction)
 
-roseo_full_scale <-roseo_full[,-c(1,2,7,36)]
+## Normality distribution check and visualization ##
+
 roseo_full_stat <-roseo_full[,-c(1,2,7,36)]
 lshap <- lapply(roseo_full_stat, shapiro.test) # KS
 lres <- sapply(lshap, `[`, c("statistic","p.value"))
-roseo_full_scale <-scale(roseo_full_stat)
+lres
 
-## Normality distribution check ##
+roseo_full_scale <-scale(roseo_full_stat)
 df <- as.data.frame(roseo_full_scale)
 df.m <- melt(df)
-ggplot(df.m) + geom_freqpoly(aes(x = value,y = ..density.., colour = variable)) +  theme(legend.position="none", panel.background = element_blank()) + scale_x_continuous(trans = 'log2')
 ggplot(df.m) + geom_freqpoly(aes(x = value,y = ..density.., colour = variable)) +  theme(legend.position="none", panel.background = element_blank())
+matrixplot(roseo_full_scale, cex.axis=.25) 
 
-## Starting multiple imputation based on the missMDA method ##
+## Starting multiple imputationon scaled data based on the missMDA method (visualization)##
 nb <- estim_ncpPCA(roseo_full_scale,method.cv = "Kfold", verbose = FALSE)
 res.comp <- imputePCA(roseo_full_scale, ncp = nb$ncp)
 res.pca <- PCA(res.comp$completeObs, ncp = nb$ncp, graph=FALSE)
 cor.mat <- round(cor(res.comp$completeObs),2)
 summary(res.pca,nbelements=Inf, file="PCA_summary_full_scale.txt")
-
-matrixplot(roseo_full_scale, cex.axis=.25) # what does this do?
 res<-summary(aggr(roseo_full_scale, sortVar=TRUE))$combinations
 corrplot(cor.mat, type="upper", order="hclust",tl.col="black", tl.srt=45, tl.cex=0.6, title="Correlation matrix of filtered data", mar=c(0,0,1,0)) # ?
 corrplot(cor.mat, order="hclust",tl.col="black", tl.srt=45, tl.cex=0.6, title="Correlation matrix of filtered data", mar=c(0,0,1,0), addrect = 7) #?
 corrplot.mixed(cor.mat, number.cex=0.4, tl.pos="lt", tl.col="black", tl.cex=0.7) # ?
 my_cor <- cor(cor.mat)
-heatmaply_cor(my_cor, scale_fill_gradient_fun = ggplot2::scale_fill_gradient2(low = "red", high = "blue"), margins = c(40, 40)) #?
+heatmaply_cor(my_cor, scale_fill_gradient_fun = ggplot2::scale_fill_gradient2(low = "red", high = "blue"), margins = c(40, 40))
 
 ## Visualizing multiple imputation ##
 resMI <- MIPCA(roseo_full_scale,ncp=nb$ncp) # ncp was already calculated!
@@ -78,7 +79,7 @@ par(cex = 0.5)
 plot(resMI, choice ="var", new.plot=FALSE)
 par(opar)
 
-## Multiple imputation with no scaling ## 
+## Multiple imputation with no scaling (one type of output)## 
 roseo_full_nonscale_clean <-roseo_full[,-c(1,2,7,36)]
 nb <- estim_ncpPCA(roseo_full_nonscale_clean,method.cv = "Kfold", verbose = FALSE, scale = F)
 res.comp <- imputePCA(roseo_full_nonscale_clean, ncp = nb$ncp,scale = F)
@@ -86,11 +87,12 @@ export_nonscale_full <- cbind(roseo_full[,c(1,2,7,36)],res.comp$completeObs)
 write.table(export_nonscale_full, file = "pacific_nonscale_imputed_meinhard_full.txt", quote = F, sep = "\t")
 write.table(res.comp$completeObs, file = "pacific_nonscale_imputed_meinhard_onlyimputed.txt", quote = F, sep ="\t")
 
-## When different measurement series are used, min-max scaling is applied for better coloring and comparative stats: (we used this, run separately for Atlantic and PAcidc, then merged) ##
+## When different measurement series are used, min-max scaling is applied for better coloring and comparative stats of the TDA: (second option for outpput; we used this, run separately for Atlantic and Pacific sets, then merged them) ##
 normalize <- function(x) {
   return ((x - min(x)) / (max(x) - min(x)))
 }
 
+# Assemble final output #
 nonscale_table <- as.data.frame(res.comp$completeObs)
 scale_table <- apply(nonscale_table,2,normalize)
 export_scale_full <- cbind(roseo_full[,c(1,2,7,36)],scale_table)
@@ -103,11 +105,11 @@ write.table(export_scale_full, file = "pacific_scale_imputed_meinhard_full.txt",
 
 # use the imputed, nonscaled data, then pca, then, NMDS, RDA, PCoA
 
-roseo_vegan <-res.comp$completeObs
+roseo_vegan <-res.comp$completeObs # nonscaled multiple imputation
 #roseo_vegan <- read.table("nonscale_imputed_meinhard_onlyimputed.txt")
-roseo_veganspec <- read.csv("TaxCountTab.csv", sep=",")
+roseo_veganspec <- read.csv("TaxCountTab.csv", sep=",") # OTU/ASV tables
 
-##Get the taxonomic lever, here the Order ##
+##Get the taxonomic level, here the Order ##
 roseo_veganspec <- roseo_veganspec[,-c(1,2,3,5,6)]
 
 ## Remove NAs ## 
@@ -129,8 +131,8 @@ collist <- colnames(roseo_veganspec_dna)
 roseo_vegan_dna <- roseo_vegan[collist,]
 
 ## Check if some samples are lost: ##
-#testlist<-rownames(subset(roseo_vegan,row.names(roseo_vegan) %in% collist))
-#setdiff(collist,testlist)
+testlist<-rownames(subset(roseo_vegan,row.names(roseo_vegan) %in% collist))
+setdiff(collist,testlist)
 
 roseo_veganspec_dna <- t(roseo_veganspec_dna)
 
