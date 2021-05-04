@@ -72,5 +72,7 @@ In the last part of the R script, several ordination methods are included, as an
  
 ## Resources:
 Josse J, Husson F (2016). “missMDA: A Package for Handling Missing Values in Multivariate Data Analysis.” Journal of Statistical Software, 70(1), 1–31. doi: 10.18637/jss.
+
 https://datasharkie.com/how-to-normalize-data-in-r/
+
 https://www.codecademy.com/articles/normalization
