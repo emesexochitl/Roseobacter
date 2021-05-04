@@ -1,9 +1,9 @@
-# Merging more or less similar CSV format files for later imputation/clustering.
+# Performing multiple imputation to save data.
 
 # Details:
 # title           :Pretest_multiple_imput.R 
 # author          :Emese Xochitl Szabo
-# email:	  :emese.szabo@uni-oldenburg.de
+# email:	        :emese.szabo@uni-oldenburg.de
 # date            :26/02/2021
 # version         :0.1
 # license         :GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
@@ -36,7 +36,7 @@ library(tidyverse)
 
 #setwd("") <- working library
 pdf("Meinhard_eco_pacific_scaled.pdf")  
-roseo_full <- read.csv("Meta_Data_Pacific_Comparison.txt", header = T,sep="\t",as.is = T, fileEncoding="UTF-8", check.names = F) # problems with rownames - water depth inaccurate
+roseo_full <- read.csv("Meta_Data_Pacific_Comparison.txt", header = T,sep="\t",as.is = T, fileEncoding="UTF-8", check.names = F)
 roseo_full <- roseo_full %>% filter(str_detect(Sample_ID, "DV", negate = TRUE)) # for the special Deep Vienna samples
 roseo_full$Size_Fraction <- as.numeric(roseo_full$Size_Fraction)
 
@@ -79,7 +79,7 @@ par(cex = 0.5)
 plot(resMI, choice ="var", new.plot=FALSE)
 par(opar)
 
-## Multiple imputation with no scaling (one type of output)## 
+## Multiple imputation with no scaling (one type of output) ## 
 roseo_full_nonscale_clean <-roseo_full[,-c(1,2,7,36)]
 nb <- estim_ncpPCA(roseo_full_nonscale_clean,method.cv = "Kfold", verbose = FALSE, scale = F)
 res.comp <- imputePCA(roseo_full_nonscale_clean, ncp = nb$ncp,scale = F)
@@ -92,7 +92,7 @@ normalize <- function(x) {
   return ((x - min(x)) / (max(x) - min(x)))
 }
 
-# Assemble final output #
+# Assemble final output: multiple imputed, originally nonscaled, but Min-Max normalized #
 nonscale_table <- as.data.frame(res.comp$completeObs)
 scale_table <- apply(nonscale_table,2,normalize)
 export_scale_full <- cbind(roseo_full[,c(1,2,7,36)],scale_table)
