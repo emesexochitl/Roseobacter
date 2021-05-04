@@ -56,7 +56,7 @@ Second, multiple imputation is performed on scaled data for visualization purpos
 * Multiple imputation plots: they show  the procrustean representation of the individuals, dimensions of the PCA and the projection of the variables as supplementary variables, in this order. Pay attention to the amount of imputed values and inertia on the plots!
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/14163953/117017372-d5448500-acf3-11eb-8721-722d27b3816e.jpg" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117017372-d5448500-acf3-11eb-8721-722d27b3816e.jpg" width="300" height="auto" />
 <img src="https://user-images.githubusercontent.com/14163953/117017367-d4abee80-acf3-11eb-9f9d-772675c7c360.jpg"  width="300" height="auto" />
 <img src="https://user-images.githubusercontent.com/14163953/117017352-d1b0fe00-acf3-11eb-8d33-b546390cdc9a.jpg"  width="300" height="auto" />
 </p>
