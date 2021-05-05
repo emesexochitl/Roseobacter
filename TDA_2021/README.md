@@ -36,6 +36,6 @@ Begin with loading the environment, then edit the scipt according to your needs.
  
 ## Resources:
 Carlsson, Gunnar. (2009). Topology and Data. Bulletin of The American Mathematical Society - BULL AMER MATH SOC. 46. 255-308. 10.1090/S0273-0979-09-01249-X. 
-GUDHI
-Daniel Müller
-Ayasdi
+GUDHI  
+Daniel Müller  
+Ayasdi  
