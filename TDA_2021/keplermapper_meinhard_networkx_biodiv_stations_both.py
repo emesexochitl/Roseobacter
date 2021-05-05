@@ -1,40 +1,63 @@
+## Performing Topological Data Analysis, statistical evaulation of topological elements, visualization and data extraxtion. ##
+
+# Details:
+# title           :keplermapper_meinhard_networkx_biodiv_stations_both.py  
+# author          :Emese Xochitl Szabo
+# email:	  :emese.szabo@uni-oldenburg.de
+# date            :25/02/2021
+# version         :0.1
+# license         :GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
+# usage           :python keplermapper_meinhard_networkx_biodiv_stations_both.py
+# notes           :GUDHI environment has to be activated first
+# python_version  :3.8.2
+
 #!/usr/bin/python
 
+## Import basic modules for data loading, preprocessing visualisation. ##
 import numpy as np
 import scipy
-import kmapper as km
-import sklearn
-from sklearn import ensemble
-from sklearn.datasets import load_digits
-from sklearn.manifold import Isomap
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
-from sklearn.decomposition import PCA
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import sklearn
-from sklearn import datasets
-from kmapper.plotlyviz import plotlyviz
+from collections import Counter
 import math
-import networkx as nx
-import pygraphviz
 import pdfkit
 import re
 import os
 import subprocess
 import shlex
-import gudhi as gd
-#from sklearn_tda import *
-import sklearn_tda
-import statmapper as stm
+
+## Import modules for mandatory TDA construction. ##
+import kmapper as km
+from kmapper.plotlyviz import plotlyviz
+import networkx as nx
+import pygraphviz
+
+## Import optional modules, if the lens needs it. ##
+import sklearn
+from sklearn import ensemble
+from sklearn.datasets import load_digits
+from sklearn.manifold import Isomap
+from sklearn.preprocessing import LabelEncoder
+from sklearn.decomposition import PCA
+from sklearn import datasets
 from sklearn.manifold import MDS
 import mapper # Daniel Müller, for lenses.
 from scipy.spatial.distance import pdist, squareform
 from sklearn.decomposition import PCA
+
+## Import optional modules for TDA statistical evaulation and persistent homology. ##
+import gudhi as gd
+import sklearn_tda
+import statmapper as stm
 from collections import Counter
-import math
-# Load summarized OTU table.
+
+## Give the name of the run. ## 
+runtype = "Linf_BC_10_04_new_both_species_scaled_filtered_1lens_stations"
+
+# Load OTU table.
 df1 = pd.read_csv("../../Full_scaled_filtered_both_Count.tsv", sep="\t")
+
 
 # Modifications for Genus runs:
 ##df1 = df1.drop(df1.columns[0:6], axis=1)
@@ -51,26 +74,24 @@ print(df1)
 df1 = df1.select_dtypes([np.number])
 df1 = df1.T
 names = [c for c in df1.columns]
-runtype = "Linf_BC_10_04_new_both_species_scaled_filtered_1lens_stations"
-X = np.array(df1) #(df1[names]) # .fillna(0)) # doesen't work with NaNs
-#print(df1)
-## Load labels for later coloring. Matching key should be the station!
+X = np.array(df1) #(df1[names]) # .fillna(0)) # safety step, because TDA doesen't work with NaNs
+
+## Load labels for later coloring. Matching key should be the station! ##
 df_ori = pd.read_csv("../../both_merged_scale_imputed_meinhard_ocean.csv", sep=",") # two tables were separately imputed.
-feature_names = [c for c in df_ori.columns if c not in ["Cruise","Station","Date","Time"]]
+feature_names = [c for c in df_ori.columns if c not in ["Cruise","Station","Date","Time"]] # don't forget to deselect unnecessary values
 labeldf = df_ori.copy()
 labeldf = labeldf[labeldf.Sample_ID.isin(df1.index)]
 labeldf = labeldf[feature_names]
 print("labels")
 print(labeldf)
 
-##df["diagnosis"] = df["diagnosis"].apply(lambda x: 1 if x == "M" else 0) ## good for binary categories
-#Y0 = np.array(df2[feature_names].fillna(0)) # doesen't work with NaNs
+## Optional step for binary categories ##
+#df["diagnosis"] = df["diagnosis"].apply(lambda x: 1 if x == "M" else 0)
 
-#Turn categorical data to numbers.
-##plot_labels = np.array(df2["Province"]) #z
-df2 = df_ori.copy()
-print(df2)
-for o in  0, 3:
+##Turn categorical data to numbers. ##
+
+df2 = df_ori.copy() # labels have to stay the same, copy provides separate table to manipulate.
+for o in  0, 3: # choose columns manually with categorical data
     x = df2.iloc[:, 0:].values
     labelencoder_x = LabelEncoder()
     print(x)
@@ -79,109 +100,96 @@ for o in  0, 3:
     df2.iloc[:, o] =newval
 filtered = df2[df2.Sample_ID.isin(df1.index)]
 filtered = filtered[feature_names]
-print("After filtering")
-print(filtered)
-# Only for coloring. Here NaNs will be zeros, and that will mark the missing values.
-#labels = ['Province', 'Depth [m]'] #, 'Bot. Depth [m]', 'DNA_div','DNA_ENS', 'RNA_div', 'RNA_ENS']
-##labels = [c for c in df2.columns if c not in ["ID","Station","Cruise"]] #, 'Depth_m']] #, 'Bot_Depth..m']]
-##Y = np.array(filtered[labels].fillna(0))
 Y=np.array(filtered)
 labels= feature_names
 
-# run Keplermapper with filters -  question is optimisation of parameters. Should be run with GUDHI beforehand?
+## inicialize Keplermapper ##
 kmmapper = km.KeplerMapper(verbose=2)
 
-# choose 1 lens here
+## choose 1 lens here: it is recommened to test out all of them and see which lens separates the patterns best. Advice: if it does not work, check the array shape! ##
 
-# Custom 1-D lens with Isolation Forest - detecting anomalies
-##model = ensemble.IsolationForest(random_state=1729)
-##model.fit(X)
-##lens = model.decision_function(X).reshape((X.shape[0], 1))
+## Custom 1-D lens with Isolation Forest - detecting anomalies ##
+#model = ensemble.IsolationForest(random_state=1729)
+#model.fit(X)
+#lens = model.decision_function(X).reshape((X.shape[0], 1))
 
-# 1-D lens with Isomap - to disperse and reduce dimensions.
-##embedding = Isomap(n_components=1) # not sure of n_components are good
-##lens = embedding.fit_transform(X)
+## 1-D lens with Isomap - to disperse and reduce dimensions. ##
+#embedding = Isomap(n_components=1) # not sure of n_components are good 
+#lens = embedding.fit_transform(X)
 
-#Normalization, get some distance with l2norm
-##lens = kmmapper.fit_transform(X, projection="l2norm")
+## Normalization, get some distance with l2norm ##
+#lens = kmmapper.fit_transform(X, projection="l2norm")
 
-# If I want to use an environmental parameter as a lens
-##Z = filtered.fillna(0)
-##Z = np.array(Z)
-##lens = kmmapper.fit_transform(Z, projection=[4]) # Latitude
+## If I want to use an environmental parameter as a lens (make sure to choose the right column)##
+#Z = filtered.fillna(0)
+#Z = np.array(Z)
+#lens = kmmapper.fit_transform(Z, projection=[4]) # It was Latitude for the subproject
 
-# Combine all lenses: (not for this setup)
-##lens = np.c_[lens1,lens2]
+## Combine all lenses: (not for this setup, if you want to do, choose two lenses and name them lens1 and lens2)
+#lens = np.c_[lens1,lens2]
 
-#Multidimensional scaling
-##embedding = MDS(n_components=1, random_state=1)
-##lens = embedding.fit_transform(X)
+## Multidimensional scaling ##
+#embedding = MDS(n_components=1, random_state=1)
+#lens = embedding.fit_transform(X)
 
-# Row mean
-##lens = kmmapper.fit_transform(X, projection="mean")
+## Row mean ##
+#lens = kmmapper.fit_transform(X, projection="mean")
 
-# Row median
-##lens = kmmapper.fit_transform(X, projection="median")
+## Row median ##
+#lens = kmmapper.fit_transform(X, projection="median")
 
-# eccenticity
-##lens=mapper.filters.eccentricity(X)
-#lens = np.reshape(lens, (9370, 1))
+## Eccenticity ##
+#lens=mapper.filters.eccentricity(X)
+#lens = np.reshape(lens, (len(lens), 1))
 
-# Distance to measure
-##lens=mapper.filters.distance_to_measure(X,2)
-##lens = np.reshape(lens, (9370, 1))
+## Distance to measure ##
+#lens=mapper.filters.distance_to_measure(X,2)
+#lens = np.reshape(lens, (len(lens), 1))
 
-# L-inf centrality with Bray-Curtis
-pairwise_dist = squareform(pdist(X, "braycurtis"))
-lens=np.amax(pairwise_dist, axis = 1)
-lens=np.nan_to_num(lens)
-##lens = np.reshape(lens, (9370, 1))
+## L-inf centrality with Bray-Curtis ##
+#pairwise_dist = squareform(pdist(X, "braycurtis"))
+#lens=np.amax(pairwise_dist, axis = 1)
+#lens=np.nan_to_num(lens)
+#lens = np.reshape(lens, (len(lens), 1))
 
-#PCA
-##lens = kmmapper.fit_transform(X, projection=PCA(n_components=1, random_state=1))
+## PCA ##
+##ens = kmmapper.fit_transform(X, projection=PCA(n_components=1, random_state=1))
 
-# Laplacian
-##lens=mapper.filters.graph_Laplacian(X, eps=30000, k=2)
+## Laplacian ##
+#lens=mapper.filters.graph_Laplacian(X, eps=30000, k=2)
 
-#Eigenvectors - SVD
-##lens=mapper.filters.dm_eigenvector(X,mean_center=True,k=0,metricpar={'metric': 'braycurtis'})
-
+## Eigenvectors - SVD ##
+#lens=mapper.filters.dm_eigenvector(X,mean_center=True,k=0,metricpar={'metric': 'braycurtis'})
 lens = np.reshape(lens, (len(lens), 1))
-print(lens)
 
-# Transforming mapper simplicial complex to simplex tree. Gain has to be set beforehand, between 0.1 and 0.4.
-# Resolution however can be estimated, but it will give simplier graphs.
-
+## Transforming mapper simplicial complex to simplex tree. Gain has to be set beforehand, between 0.1 and 0.4. Resolution however can be estimated, but it will give simplier graphs. ##
 
 params = {"filters": lens, "filter_bnds": np.array([[np.nan,np.nan]]), "colors": X[:,2:3],\
  "resolutions": np.array([10]), "gains": np.array([0.4]), "inp": "point cloud",\
  "clustering": sklearn.cluster.KMeans(n_clusters=2,random_state=1618033)}
 
 mymapper = sklearn_tda.clustering.MapperComplex(**params).fit(X)
-
 mapper_simplex_tree = mymapper.mapper_
 
+## Check structure of the simplicial complex ##
 print("Number of simplices and vertices:")
 print(mymapper.mapper_.num_simplices())
 print(mymapper.mapper_.num_vertices())
 print(mymapper.resolutions)
 
+## Create persistence barcode and diagrams: visualize the levels of topological elements. ##
 diag = mapper_simplex_tree.persistence(min_persistence=-1,persistence_dim_max=3) # show all elements to Betti number 2.
-##print(diag)
-
 barcode_pdf = (('Meinhard_%s_barcode.pdf') % runtype)
-#plt.figure()
 gd.plot_persistence_barcode(diag)
 plt.savefig(barcode_pdf)
 plt.clf()
 
 persdiag_pdf = (('Meinhard_%s_persistencediag.pdf') % runtype)
-#plt.figure()
 gd.plot_persistence_diagram(persistence=diag)
 plt.savefig(persdiag_pdf)
 plt.clf()
 
-# here statmapper
+## Transform the simplicial complex to a NetworkX graph for reprodicuble representation. ##
 statnum_pdf = (('Meinhard_%s_node_nums.pdf') % (runtype))
 G = stm.mapper2networkx(mymapper)
 nx.draw(G,with_labels=True)
