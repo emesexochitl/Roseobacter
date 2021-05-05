@@ -2,10 +2,10 @@
 Intro.
 
 ## Dependencies:
-In order to run the complete script, first the GUDHI environment has to be installed via the anaconda xxx:
-conda install gudhi
-Then it has to be activated:
-conda activate gudhi
+In order to run the complete script, first the GUDHI environment has to be installed via the anaconda xxx:  
+conda install gudhi  
+Then it has to be activated:  
+conda activate gudhi  
 
 ## How to use it: ##
 
