@@ -1,5 +1,5 @@
 ## Intro - What is TDA and how does it work?
-The basic idea behind Topological DAta Analysis (TDA) is that data has shape and shape has information (Karlsson, 2009). This comes in handy when we face complex biological data sets with multiple patterns hidden in. Usually insuch cases it is really hard to detect these complex, often localized patterns. TDA gives an intuitive insight how these patterns are organized
+The basic idea behind Topological DAta Analysis (TDA) is that data has shape and shape has informtion (Carlsson, 2009). This comes in handy when we face complex biological data sets with multiple patterns hidden in. Usually insuch cases it is really hard to detect these complex, often localized patterns. TDA gives an intuitive insight how these patterns are organized
 
 ## Dependencies:
 In order to run the complete script, first the GUDHI environment has to be installed via the anaconda xxx:  
@@ -34,6 +34,7 @@ Begin with loading the environment, then edit the scipt according to your needs.
  * It was only tested for the subproject
  
 ## Resources:
+Carlsson, Gunnar. (2009). Topology and Data. Bulletin of The American Mathematical Society - BULL AMER MATH SOC. 46. 255-308. 10.1090/S0273-0979-09-01249-X. 
 GUDHI
 Daniel Müller
 Ayasdi
