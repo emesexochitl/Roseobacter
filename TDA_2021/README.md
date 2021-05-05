@@ -9,8 +9,10 @@ Then it has to be activated:
 conda activate gudhi  
 
 ## How to use it: ##
-
-Begin with loading the environment, then edit the scipt according to your needs. It is recommended first to test how the different lenses perform and turn off the bootstrapping part of the stratistical evaulation. As a rule of thumb, a good lens would give a nice, structured inverse image, with observable topological elements, such as branches, loops and even separate clusters. If the lens looks nice, one can check the dispersion of  values in the coloring step of the graph. It is especially interesting to observe the categorical values represented as piecharts.
+  
+Before discussing the details, it is recommended first to test how the different lenses perform and turn off the bootstrapping part of the statistical evaulation. As a rule of thumb, a good lens would give a nice, structured inverse image, with observable topological elements, such as branches, loops and even separate clusters. If the lens looks nice, one can check the dispersion of  values in the coloring step of the graph. It is especially interesting to observe the categorical values represented as piecharts.  
+Begin with loading the environment, then edit the scipt according to your needs. If there are categorical values, they will be transformed to numerical values, but it has to be manually given. When the simplicial complex is constructed, gain and resolution can be estimated by using xxx (french guy ref). Based on experience, it gives rather too simple graphs, so as a solution, gain is set to the maximum, 0.4 (personal recommendation of xxx). KMeans clustering with a minimum amount of two centroids is performed in this step.  
+After the construction of the simplicial complex -> simpplex tree, persistence diagrams, networkX
 
 ## Functions:
  Lenses:
