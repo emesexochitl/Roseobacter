@@ -6,14 +6,22 @@ All of the classical ordination methods suffer from the disadvantage of pairwise
 
 The script is written in Python 3. Because in the time of creating this pipeline many functions were not avaiable in one package, lot of the functions come from various sources. The most important are the following:
 
-* GUDHI: In order to run the complete script, first the GUDHI environment has to be installed via conda:  
-conda install -c conda-forge gudhi  Then it has to be activated:  conda activate gudhi 
+* GUDHI: Persistent homology, simplex tree. In order to run the complete script, first the GUDHI environment has to be installed via conda:  
+conda install -c conda-forge gudhi  
+Then it has to be activated: 
+conda activate gudhi  
+* numpy, scipy, pandas, Counter for data formatting and special operations
+* kmapper for constucting the simplicial complex: https://kepler-mapper.scikit-tda.org/en/latest/
+* sklearn and different parts of it to construct lenses
+* Mapper: http://danifold.net/mapper/installation/
+* sklearn_tda: https://github.com/MathieuCarriere/sklearn-tda
+* statmapper: bootstrapping and statistical evaulation. https://github.com/MathieuCarriere/statmapper  
 
 ## How to use it: ##
   
 Before discussing the details, it is recommended first to test how the different lenses perform and turn off the bootstrapping part of the statistical evaulation. As a rule of thumb, a good lens would give a nice, structured inverse image, with observable topological elements, such as branches, loops and even separate clusters. If the lens looks nice, one can check the dispersion of  values in the coloring step of the graph. It is especially interesting to observe the categorical values represented as piecharts.  
 Begin with loading the environment, then edit the scipt according to your needs. If there are categorical values, they will be transformed to numerical values, but it has to be manually given. When the simplicial complex is constructed, gain and resolution can be estimated by using xxx (french guy ref). Based on experience, it gives rather too simple graphs, so as a solution, gain is set to the maximum, 0.4 (personal recommendation of xxx). KMeans clustering with a minimum amount of two centroids is performed in this step.  
-After the construction of the simplicial complex -> simpplex tree, persistence diagrams, networkX
+After the construction of the simplicial complex -> simplex tree, persistence diagrams, networkX
 
 ## Functions:
  Lenses:
