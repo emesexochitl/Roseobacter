@@ -3,10 +3,11 @@ The basic idea behind Topological DAta Analysis (TDA) is that data has shape and
 All of the classical ordination methods suffer from the disadvantage of pairwise comparisons and necessary exclusion of other less powerful, but important drivers of the ecological processes, or in case of multiple factor analysis, they have to apply constraints (ref and check), further weakening its significance. Nonetheless, because of the interconnectivity, it is hard to pick the best possible hypothesis and how to rank collected information a priori. 
 
 ## Dependencies:
-In order to run the complete script, first the GUDHI environment has to be installed via the anaconda xxx:  
-conda install gudhi  
-Then it has to be activated:  
-conda activate gudhi  
+
+The script is written in Python 3. Because in the time of creating this pipeline many functions were not avaiable in one package, lot of the functions come from various sources. The most important are the following:
+
+* GUDHI: In order to run the complete script, first the GUDHI environment has to be installed via conda:  
+conda install -c conda-forge gudhi  Then it has to be activated:  conda activate gudhi 
 
 ## How to use it: ##
   
@@ -38,6 +39,6 @@ After the construction of the simplicial complex -> simpplex tree, persistence d
  
 ## Resources:
 Carlsson, Gunnar. (2009). Topology and Data. Bulletin of The American Mathematical Society - BULL AMER MATH SOC. 46. 255-308. 10.1090/S0273-0979-09-01249-X. 
-GUDHI  
+https://gudhi.inria.fr/  
 Daniel Müller  
 Ayasdi  
