@@ -1,7 +1,8 @@
 ## Intro - What is TDA and how does it work?
-The basic idea behind Topological DAta Analysis (TDA) is that data has shape and shape has information (Carlsson, 2009). This comes in handy when we face complex biological data sets with multiple patterns hidden in. Usually insuch cases it is really hard to detect these complex, often localized patterns. TDA gives an intuitive insight how these patterns are organized.
+The basic idea behind Topological DAta Analysis (TDA) is that data has shape and shape has information (Carlsson, 2009). This comes in handy when we face complex biological data sets with multiple patterns hidden in. Usually in such cases it is really hard to detect these complex, often localized patterns. TDA gives an intuitive insight how these patterns are organized.
 All of the classical ordination methods suffer from the disadvantage of pairwise comparisons and necessary exclusion of other less powerful, but important drivers of the ecological processes, or in case of multiple factor analysis, they have to apply constraints (ref and check), further weakening its significance. Nonetheless, because of the interconnectivity, it is hard to pick the best possible hypothesis and how to rank collected information a priori. 
 
+Explain more wih the Ayasdi concept
 ## Dependencies:
 
 The script is written in Python 3. Because in the time of creating this pipeline many functions were not avaiable in one package, lot of the functions come from various sources. The most important are the following:
