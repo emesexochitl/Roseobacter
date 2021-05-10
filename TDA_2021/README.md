@@ -1,8 +1,8 @@
 ## Intro - What is TDA and how does it work?
-The basic idea behind Topological DAta Analysis (TDA) is that data has shape and shape has information (Carlsson, 2009). This comes in handy when we face complex biological data sets with multiple patterns hidden in. Usually in such cases it is really hard to detect these complex, often localized patterns. TDA gives an intuitive insight how these patterns are organized.
-All of the classical ordination methods suffer from the disadvantage of pairwise comparisons and necessary exclusion of other less powerful, but important drivers of the ecological processes, or in case of multiple factor analysis, they have to apply constraints (ref and check), further weakening its significance. Nonetheless, because of the interconnectivity, it is hard to pick the best possible hypothesis and how to rank collected information a priori. 
+The basic idea behind Topological Data Analysis (TDA) is that data has shape and shape has information (Carlsson, 2009). This comes in handy when we face complex biological data sets with multiple patterns hidden in. Usually in such cases it is really hard to detect these complex, often localized patterns. All classical ordination methods suffer from the disadvantage of pairwise comparisons and necessary exclusion of other less powerful, but important drivers of the ecological processes, or in case of multiple factor analysis, they have to apply constraints (ref and check), further weakening its significance. Nonetheless, because of the interconnectivity, it is hard to pick the best possible hypothesis and how to rank collected information a priori.  TDA gives an intuitive insight how these patterns are organized.
 
 Explain more wih the Ayasdi concept
+
 ## Dependencies:
 
 The script is written in Python 3. Because in the time of creating this pipeline many functions were not avaiable in one package, lot of the functions come from various sources. The most important are the following:
@@ -25,7 +25,8 @@ As a general step it is recommended first to test how the different lenses perfo
 But what does exacly happening when the script is executed? It begins with loading the environment. Then the input tables are loaded. Here one can choose what type of table they want to use as the base of the graph (in this case it was an OTU/ASV table to see how biodiversity mirrors biogeographical characteristics). The same table can be used for coloring as well, however in this case a separate table was used (environmental parameters). If there are categorical values in this input, they will be transformed to numerical values, but it has to be manually given. After that, one can choose and test the lenses.  
 When the simplicial complex is constructed, gain and resolution can be estimated (see statmapper documentation). Based on experience, it gives rather too simple graphs, so as a solution, gain is set to the maximum, 0.4 (personal recommendation of Mathieu Carrière). KMeans clustering with a minimum amount of two centroids is performed in this step.  
 After the construction of the simplicial complex, in order to analyze persistent homology it is transformed to a simplex tree, then to persistence diagrams. One type of it is the barcode diagram, where horizontal lines represent the number and dimenson of topological elements in the complex. That can be used to clarify and compare different TDA runs.
-networkX
+Other analytic steps are performed as well, but before that, the graph is transformed into a NetworkX graph. This allows to do comparative analysis by "freezing" the structure. However, a classic KeplerMapper HTML output is also generated, together with a PDF version.
+In the next step, the statistical evaulation take splace. It is recommened to have 100 times bootstrapping with 95% CI. As a result, the significant topological elements (connected components, loops, and up- or downbranches) will be colored yellow. Beware, when it tries to evaulate the down/upbranch it analyzes the values IN the graph. After that, two grey colored plots are generated as well, to show either the node numbers, or names. Sometimes when graphs get more complex, other visualizations are useful as well. Betwenness and Eigenvector-centrality are plotted for this reason. With betweenness we can see the shortest way, or the level of connections of the edges, with the Eigenvector version we seethe influence of a node has on the network.
 
 ## Functions:
  Lenses:
@@ -45,8 +46,9 @@ networkX
  * combine two lenses (not applied to the subproject)
 
 ## Limitations:
- * if different data sets are used, Min-Max normalization of the data would be recommened for later statistical tests.
- * when using row mean or median, in general lenses don't perform well and a measurement-dependent bias is introduced.
+ * If different data sets are used, Min-Max normalization of the data would be recommened for later statistical tests.
+ * When using row mean or median, in general lenses don't perform well and a measurement-dependent bias is introduced.
+ * I mostly focused on the connected components and loops at the significance test. Hopefully in the future there will be tools for more sophisticated analysis.
  * It was only tested for the subproject
  
 ## Resources:
