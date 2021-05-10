@@ -64,7 +64,7 @@ Sometimes when graphs get more complex, other visualizations are useful as well.
  * MDS: Multidimensional scaling -  display dissimiliarities. It runs a metric MDS.
  * mean: row mean.
  * median: row median.
- * Eccenticity: how close a point lies to the center of the cloud.
+ * Eccentricity: how close a point lies to the center of the cloud.
  * DTM: Distance to measure - estimating the persistent homology of S directly.
  * L-inf: centrality using Bray-Curtis disssimilarity matrix- assigns to each point the distance to the point most distant from it. Note: many other distance measurements can be used, but BC usually performs the best for ecological samples.
  * PCA: reducing dimensions, finding axes of greatest variance.
