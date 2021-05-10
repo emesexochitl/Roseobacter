@@ -42,9 +42,9 @@ Other analytic steps are performed as well, but before that, the graph is transf
 In the next step, the statistical evaulation take splace. It is recommened to have 100 times bootstrapping with 95% CI. As a result, the significant topological elements (connected components, loops, and up- or downbranches) will be colored yellow. Beware, when it tries to evaulate the down/upbranch it analyzes the values IN the graph. After that, two grey colored plots are generated as well, to show either the node numbers, or names. 
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/14163953/117681623-952d4880-b1b2-11eb-91a7-63bbcd4e9ea2.jpg" width="300" height="auto" />
-<img src="https://user-images.githubusercontent.com/14163953/117681611-92325800-b1b2-11eb-9df1-2230bf0ee45f.jpg" width="300" height="auto" />
-<img src="https://user-images.githubusercontent.com/14163953/117681598-8fcffe00-b1b2-11eb-8170-f0cec0333f19.jpg"  width="300" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117681623-952d4880-b1b2-11eb-91a7-63bbcd4e9ea2.jpg" width="400" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117681611-92325800-b1b2-11eb-9df1-2230bf0ee45f.jpg" width="400" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117681598-8fcffe00-b1b2-11eb-8170-f0cec0333f19.jpg"  width="400" height="auto" />
 </p>
 
 Sometimes when graphs get more complex, other visualizations are useful as well. Betwenness and Eigenvector-centrality are plotted for this reason. With betweenness we can see the shortest way, or the level of connections of the edges, with the Eigenvector version we seethe influence of a node has on the network.
