@@ -50,7 +50,6 @@ from sklearn.decomposition import PCA
 import gudhi as gd
 import sklearn_tda
 import statmapper as stm
-from collections import Counter
 
 ## Give the name of the run. ## 
 runtype = "Linf_BC_10_04_new_both_species_scaled_filtered_1lens_stations"
@@ -103,7 +102,7 @@ filtered = filtered[feature_names]
 Y=np.array(filtered)
 labels= feature_names
 
-## inicialize Keplermapper ##
+## initialize Keplermapper ##
 kmmapper = km.KeplerMapper(verbose=2)
 
 ## choose 1 lens here: it is recommened to test out all of them and see which lens separates the patterns best. Advice: if it does not work, check the array shape! ##
@@ -153,7 +152,7 @@ kmmapper = km.KeplerMapper(verbose=2)
 #lens = np.reshape(lens, (len(lens), 1))
 
 ## PCA ##
-##ens = kmmapper.fit_transform(X, projection=PCA(n_components=1, random_state=1))
+#lens = kmmapper.fit_transform(X, projection=PCA(n_components=1, random_state=1))
 
 ## Laplacian ##
 #lens=mapper.filters.graph_Laplacian(X, eps=30000, k=2)
@@ -190,53 +189,19 @@ plt.savefig(persdiag_pdf)
 plt.clf()
 
 ## Transform the simplicial complex to a NetworkX graph for reprodicuble representation. ##
+nx_graph = stm.mapper2networkx(mymapper)
+pos = nx.nx_agraph.graphviz_layout(nx_graph, prog='neato')
 statnum_pdf = (('Meinhard_%s_node_nums.pdf') % (runtype))
-G = stm.mapper2networkx(mymapper)
-nx.draw(G,with_labels=True)
-#plt.show()
+nx.draw(nx_graph,with_labels=True)
 plt.savefig(statnum_pdf)
 plt.clf()
 
-function = lens # filter or sum? or color?
-topo = ["connected_components", "loop", "downbranch", "upbranch"]
-confidence = 0.95 # check if enough
-bootstrap  = 100
-
-for t in topo:
-    dgm, bnd = stm.compute_topological_features(mymapper, function, "data", t)
-    print(dgm, bnd)
-    topo_pdf = (('Meinhard_%s_%s_topo_elements.pdf') % (runtype,t))
-    plt.figure(figsize=(40,10))
-    for idx, bd in enumerate(bnd):
-        plt.subplot(1,len(bnd),idx+1)
-        nx.draw(G, pos=nx.nx_agraph.graphviz_layout(G, prog='neato'), with_labels=True, node_color=[1 if node in bd else 0 for node in G.nodes()])
-        plt.title(t)
-
-    plt.savefig(topo_pdf)
-    plt.clf()
-
-    sdgm, sbnd = stm.evaluate_significance(dgm, bnd, X, mymapper, function, params, t, confidence, bootstrap)
-
-    ###features, pv = stm.compute_DE_features(X, mapper, sbnd[0]) this part doesn't work
-    ###print(features, pv)
-    
-    stat_pdf = (('Meinhard_%s_%s_topo_stat.pdf') % (runtype,t))
-    plt.figure(figsize=(40,10))
-    for idx, bd in enumerate(sbnd):
-        plt.subplot(1,len(sbnd),idx+1)
-        nx.draw(G, pos=nx.nx_agraph.graphviz_layout(G, prog='neato'), with_labels=True, node_color=[1 if node in bd else 0 for node in G.nodes()])
-    plt.savefig(stat_pdf)
-    plt.clf()
-
-plt.close('all')
-
-## stamapper and kepler-mapper to networkx solution - should be the same input! Later: try params?
+## stamapper and kepler-mapper to networkx solution - should be the same input! ##
 keplermapper_mapper = kmmapper.map(lens,X,cover=km.Cover(n_cubes=10, perc_overlap=0.4),clusterer=sklearn.cluster.KMeans(n_clusters=2,random_state=1618033))
 kepler_name = (('Meinhard_%s_keplermapper.html') % runtype)
 keplerhtml = kmmapper.visualize(keplermapper_mapper, path_html=kepler_name)
 
 kepler_pdf = (('Meinhard_%s_keplermapper.pdf') % runtype)
-#plt.figure()
 plt.title("kepler-mapper output")
 keplergraph = km.adapter.to_nx(keplermapper_mapper)
 keplerpos = nx.nx_agraph.graphviz_layout(keplergraph, prog='neato')
@@ -254,22 +219,46 @@ for k, v in nodedict.items():
 node_normalized=(color_map-min(color_map))/float((max(color_map)-min(color_map)))
 vmin = min(node_normalized)
 vmax = max(node_normalized)
-nx.draw_networkx(keplergraph, keplerpos, with_labels=False, node_size=nodesize, node_color=node_normalized, vmin=vmin, vmax=vmax, cmap=plt.cm.get_cmap('viridis'), width=0.25, edge_color="grey")
+nx.draw_networkx(keplergraph, keplerpos, with_labels=False, node_size=nodesize, node_color=node_normalized, vmin=vmin, vmax=vmax, cmap=plt.cm$
 plt.savefig(kepler_pdf)
 plt.clf()
 
-# this is for the later loop
-nx_graph = stm.mapper2networkx(mymapper)
-#pos = nx.spring_layout(nx_graph, dim=2, k=None, pos=None, fixed=None, iterations=100, weight='weight', scale=1.0)
-pos = nx.nx_agraph.graphviz_layout(nx_graph, prog='neato')
+## Statistical evaulation  of the simplicial complex. Beware, when it tries to evaulate the down/upbranch it analyzes the values IN the graph. ##
+function = lens 
+topo = ["connected_components", "loop", "downbranch", "upbranch"]
+confidence = 0.95 # check if enough
+bootstrap  = 100
 
-# coloring according to station order.
+for t in topo:
+    dgm, bnd = stm.compute_topological_features(mymapper, function, "data", t)
+    print(dgm, bnd)
+    topo_pdf = (('Meinhard_%s_%s_topo_elements.pdf') % (runtype,t))
+    plt.figure(figsize=(40,10))
+    for idx, bd in enumerate(bnd):
+        plt.subplot(1,len(bnd),idx+1)
+        nx.draw(nx_graph, pos=nx.nx_agraph.graphviz_layout(G, prog='neato'), with_labels=True, node_color=[1 if node in bd else 0 for node in nx_graph.nodes()])
+        plt.title(t)
+
+    plt.savefig(topo_pdf)
+    plt.clf()
+
+    sdgm, sbnd = stm.evaluate_significance(dgm, bnd, X, mymapper, function, params, t, confidence, bootstrap)
+    
+    stat_pdf = (('Meinhard_%s_%s_topo_stat.pdf') % (runtype,t))
+    plt.figure(figsize=(40,10))
+    for idx, bd in enumerate(sbnd):
+        plt.subplot(1,len(sbnd),idx+1)
+        nx.draw(nx_graph, pos=nx.nx_agraph.graphviz_layout(G, prog='neato'), with_labels=True, node_color=[1 if node in bd else 0 for node in nx_graph.nodes()])
+    plt.savefig(stat_pdf)
+    plt.clf()
+
+plt.close('all')
+
+## Add Node numbers and names ##
 color_map =[]
 nodelabel = {}
 stationlabel = {}
 newv= None
-
-# Node numbers.
 
 for node in nx_graph:
     #print(mymapper.node_info_[node])
@@ -319,13 +308,11 @@ plt.tight_layout()
 plt.savefig(station_node_pdf)
 plt.clf()
 
-# betweenes centrality
+## Betweenes centrality - ##
 cent_pdf = (('Meinhard_%s_betweeness.pdf') % runtype)
 plt.figure()
 plt.title("Betweeness")
-#nx.draw_networkx(nx_graph, pos, with_labels=False, node_size=5,width=0.25, edge_color="grey")
 degree_centrality = nx.degree_centrality(nx_graph)
-#sorted(dict(nx_graph.degree()).items(), key=lambda x: x[1], reverse=True)[:10]
 
 nx.set_node_attributes(nx_graph, name='degree centrality', values=degree_centrality)
 betweeness_centrality = nx.betweenness_centrality(nx_graph)
@@ -339,10 +326,10 @@ plt.axis('off')
 plt.savefig(cent_pdf)
 plt.clf()
 
+## Eigenvector centrality - ##
 eig_pdf = (('Meinhard_%s_eigvec.pdf') % runtype)
 plt.figure()
 plt.title("Eigenvector centrality")
-#eigenvector_centrality = nx.eigenvector_centrality(nx_graph) # or
 eigenvector_centrality = nx.eigenvector_centrality_numpy(nx_graph) 
 max_value = max(eigenvector_centrality.items(), key=lambda x: x[1])
 ec_scaled = {}
@@ -360,7 +347,6 @@ plt.savefig(eig_pdf)
 plt.clf()
 
 num = 0
-#labels = ["Province"] #,"Ocean"]
 
 for i in labels:
     extractkey = i
