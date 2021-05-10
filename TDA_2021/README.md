@@ -32,8 +32,28 @@ After the construction of the simplicial complex, in order to analyze persistent
 <img src="https://user-images.githubusercontent.com/14163953/117679987-09ff8300-b1b1-11eb-81d0-f45eac010ce2.jpg"  width="500" height="auto" />
 </p>
 
-Other analytic steps are performed as well, but before that, the graph is transformed into a NetworkX graph. This allows to do comparative analysis by "freezing" the structure. However, a classic KeplerMapper HTML output is also generated, together with a PDF version.
-In the next step, the statistical evaulation take splace. It is recommened to have 100 times bootstrapping with 95% CI. As a result, the significant topological elements (connected components, loops, and up- or downbranches) will be colored yellow. Beware, when it tries to evaulate the down/upbranch it analyzes the values IN the graph. After that, two grey colored plots are generated as well, to show either the node numbers, or names. Sometimes when graphs get more complex, other visualizations are useful as well. Betwenness and Eigenvector-centrality are plotted for this reason. With betweenness we can see the shortest way, or the level of connections of the edges, with the Eigenvector version we seethe influence of a node has on the network.
+Other analytic steps are performed as well, but before that, the graph is transformed into a NetworkX graph. This allows to do comparative analysis by "freezing" the structure. However, a classic KeplerMapper HTML output is also generated, together with a PDF version.  
+
+<p float="left">
+<img src="https://user-images.githubusercontent.com/14163953/117680785-c78a7600-b1b1-11eb-87c4-1dd3695f2932.png" width="500" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117680791-c8230c80-b1b1-11eb-9c56-32711ae3607c.jpg"  width="500" height="auto" />
+</p>
+
+In the next step, the statistical evaulation take splace. It is recommened to have 100 times bootstrapping with 95% CI. As a result, the significant topological elements (connected components, loops, and up- or downbranches) will be colored yellow. Beware, when it tries to evaulate the down/upbranch it analyzes the values IN the graph. After that, two grey colored plots are generated as well, to show either the node numbers, or names. 
+
+<p float="left">
+<img src="https://user-images.githubusercontent.com/14163953/117681623-952d4880-b1b2-11eb-91a7-63bbcd4e9ea2.jpg" width="200" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117681619-9494b200-b1b2-11eb-803c-ed7b6a29a423.jpg"  width="200" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117681611-92325800-b1b2-11eb-9df1-2230bf0ee45f.jpg" width="200" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117681598-8fcffe00-b1b2-11eb-8170-f0cec0333f19.jpg"  width="200" height="auto" />
+</p>
+
+Sometimes when graphs get more complex, other visualizations are useful as well. Betwenness and Eigenvector-centrality are plotted for this reason. With betweenness we can see the shortest way, or the level of connections of the edges, with the Eigenvector version we seethe influence of a node has on the network.
+
+<p float="left">
+<img src="https://user-images.githubusercontent.com/14163953/117682028-f5bc8580-b1b2-11eb-88fc-9253cf8e8ea4.jpg" width="500" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117682019-f523ef00-b1b2-11eb-844c-c4e8f64c97d0.jpg"  width="500" height="auto" />
+</p>
 
 ## Functions:
  Lenses:
