@@ -18,6 +18,8 @@ conda activate gudhi
 * sklearn_tda: https://github.com/MathieuCarriere/sklearn-tda
 * statmapper: bootstrapping and statistical evaulation. https://github.com/MathieuCarriere/statmapper  
 
+For the detailed depencencies, please check the script!  
+
 ## How to use it: ##
   
 As a general step it is recommended first to test how the different lenses perform and turn off the bootstrapping part of the statistical evaulation. As a rule of thumb, a good lens would give a nice, structured inverse image with observable topological elements, such as branches, loops and even separate clusters. If the lens looks nice, one can check the dispersion of values in the coloring step of the graph. It is especially interesting to observe the categorical values represented as piecharts. If everything checks out, one can run the complete script and check the significance of the topological elements.  
