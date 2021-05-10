@@ -41,7 +41,7 @@ Other analytic steps are performed as well, but before that, the graph is transf
 <img src="https://user-images.githubusercontent.com/14163953/117680791-c8230c80-b1b1-11eb-9c56-32711ae3607c.jpg"  width="500" height="auto" />
 </p>
 
-In the next step, the statistical evaulation take splace. It is recommened to have 100 times bootstrapping with 95% CI. As a result, the significant topological elements (connected components, loops, and up- or downbranches) will be colored yellow. Beware, when it tries to evaulate the down/upbranch it analyzes the values IN the graph. After that, two grey colored plots are generated as well, to show either the node numbers, or names. 
+In the next step, the statistical evaulation takes place. It is recommened to have 100 times bootstrapping with 95% CI. As a result, the significant topological elements (connected components, loops, and up- or downbranches) will be colored yellow. Beware, when it tries to evaulate the down/upbranch it analyzes the values IN the graph. After that, two grey colored plots are generated as well, to show either the node numbers, or names. 
 
 <p float="left">
 <img src="https://user-images.githubusercontent.com/14163953/117681623-952d4880-b1b2-11eb-91a7-63bbcd4e9ea2.jpg" width="300" height="300" />
