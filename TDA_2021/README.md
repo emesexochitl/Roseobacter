@@ -49,7 +49,7 @@ In the next step, the statistical evaulation takes place. It is recommened to ha
 <img src="https://user-images.githubusercontent.com/14163953/117681598-8fcffe00-b1b2-11eb-8170-f0cec0333f19.jpg"  width="300" height="300" />
 </p>
 
-Sometimes when graphs get more complex, other visualizations are useful as well. Betwenness and Eigenvector-centrality are plotted for this reason. With betweenness we can see the shortest way, or the level of connections of the edges, with the Eigenvector version we seethe influence of a node has on the network.
+Sometimes when graphs get more complex, other visualizations are useful as well. Betwenness and Eigenvector-centrality are plotted for this reason. With betweenness we can see the shortest way, or the level of connections of the nodes, with the Eigenvector version we see the influence of a node has on the network.
 
 <p float="left">
 <img src="https://user-images.githubusercontent.com/14163953/117682028-f5bc8580-b1b2-11eb-88fc-9253cf8e8ea4.jpg" width="500" height="auto" />
