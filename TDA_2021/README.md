@@ -27,6 +27,11 @@ But what does exacly happening when the script is executed? It begins with loadi
 When the simplicial complex is constructed, gain and resolution can be estimated (see statmapper documentation). Based on experience, it gives rather too simple graphs, so as a solution, gain is set to the maximum, 0.4 (personal recommendation of Mathieu Carrière). KMeans clustering with a minimum amount of two centroids is performed in this step.  
 After the construction of the simplicial complex, in order to analyze persistent homology it is transformed to a simplex tree, then to persistence diagrams. One type of it is the barcode diagram, where horizontal lines represent the number and dimenson of topological elements in the complex. That can be used to clarify and compare different TDA runs.
 
+<p float="left">
+<img src="https://user-images.githubusercontent.com/14163953/117679982-0966ec80-b1b1-11eb-8b13-2993308d2aca.jpg" width="500" height="auto" />
+<img src="https://user-images.githubusercontent.com/14163953/117679987-09ff8300-b1b1-11eb-81d0-f45eac010ce2.jpg"  width="500" height="auto" />
+</p>
+
 Other analytic steps are performed as well, but before that, the graph is transformed into a NetworkX graph. This allows to do comparative analysis by "freezing" the structure. However, a classic KeplerMapper HTML output is also generated, together with a PDF version.
 In the next step, the statistical evaulation take splace. It is recommened to have 100 times bootstrapping with 95% CI. As a result, the significant topological elements (connected components, loops, and up- or downbranches) will be colored yellow. Beware, when it tries to evaulate the down/upbranch it analyzes the values IN the graph. After that, two grey colored plots are generated as well, to show either the node numbers, or names. Sometimes when graphs get more complex, other visualizations are useful as well. Betwenness and Eigenvector-centrality are plotted for this reason. With betweenness we can see the shortest way, or the level of connections of the edges, with the Eigenvector version we seethe influence of a node has on the network.
 
