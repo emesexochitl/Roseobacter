@@ -95,5 +95,6 @@ Carlsson, Gunnar. (2009). Topology and Data. Bulletin of The American Mathematic
 https://gudhi.inria.fr/  
 https://mathieucarriere.github.io/website/publis/publis.html  
 https://github.com/MathieuCarriere  
-Daniel Müller  
-Ayasdi  
+http://danifold.net/mapper/index.html   
+https://www.ayasdi.com/social/TDAintroduction/  
+
