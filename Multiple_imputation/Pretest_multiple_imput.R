@@ -3,11 +3,11 @@
 # Details:
 # title           :Pretest_multiple_imput.R 
 # author          :Emese Xochitl Szabo
-# email:	        :emese.szabo@uni-oldenburg.de
+# email           :emese.szabo@uni-oldenburg.de
 # date            :26/02/2021
 # version         :0.1
 # license         :GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007
-# usage           :Rscript data_cleanup_hausfrau_merge.py
+# usage           :Rscript Pretest_multiple_imput.R
 # notes           :better run in Rstudio and modify to the unique needs (see most commented lines)
 # r_version       :R.3.6.3
 
