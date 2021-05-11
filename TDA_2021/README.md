@@ -56,7 +56,7 @@ Sometimes when graphs get more complex, other visualizations are useful as well.
 <img src="https://user-images.githubusercontent.com/14163953/117682019-f523ef00-b1b2-11eb-844c-c4e8f64c97d0.jpg"  width="500" height="auto" />
 </p>
 
-In the last part, coloring of the graph takes place. In case of TDA not only the shape, but the value representation has important meaning. While shapes can mean cyclic nature (loops), or anomalies (branches), coloration can highlight other hidden subparts of the graph. Since two input files were given, two types of coloration happens. One colors based on the average value of a given environmental parameter per node. Exception is the categorical value, where modal values are used. In bot cases, node size is normalized for better, balaced visualization, but the values displayed as colors and barlplots are not normalized. For better visualization, categorical values are plotted as piecharts to see the exact distribition of values in the nodes. Important here is to give manually the column names of the categorical values! The outputs are saved in PDF files and the continous value plots are compiled into a video.
+In the last part, coloring of the graph takes place. In case of TDA not only the shape, but the value representation has important meaning. While shapes can mean cyclic nature (loops), or anomalies (branches), coloration can highlight other hidden subparts of the graph. Since two input files were given, two types of coloration happens. One colors based on the average value of a given environmental parameter per node. Exception is the categorical value, where modal values are used. In bot cases, node size is normalized for better, balaced visualization, but the values displayed as colors and barplots are not normalized. For better visualization, categorical values are plotted as piecharts to see the exact distribition of values in the nodes. Important here is to give manually the column names of the categorical values! The outputs are saved in PDF files and the continous value plots are compiled into a video. 
   
 <p float="left">
 <img src="https://user-images.githubusercontent.com/14163953/117807783-5eac0800-b25c-11eb-9b49-f647db9b4f27.png" width="300" height="auto" />
@@ -64,7 +64,7 @@ In the last part, coloring of the graph takes place. In case of TDA not only the
 <img src="https://user-images.githubusercontent.com/14163953/117807774-5ce24480-b25c-11eb-92a3-a8dbb9cdf50f.png"  width="300" height="auto" />
 </p>
 
-These node values are extracted as well for later statistical tests. 
+The same procedure is repeated for the OTU/ASV table, but numerical identifiers are added to the IDs because of the Unknown/same names. Node values are extracted for later statistical tests. 
 
 ## Functions:
  Lenses:
