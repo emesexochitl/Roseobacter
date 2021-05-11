@@ -42,7 +42,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.decomposition import PCA
 from sklearn import datasets
 from sklearn.manifold import MDS
-import mapper # Daniel Müller, for lenses.
+import mapper # Daniel Müllner, for lenses.
 from scipy.spatial.distance import pdist, squareform
 from sklearn.decomposition import PCA
 
@@ -347,19 +347,20 @@ plt.savefig(eig_pdf)
 plt.clf()
 
 num = 0
+## Coloring of the nodes based on average environmental values. ##
 
 for i in labels:
     extractkey = i
     num = num +1
-    ##i = re.sub('[^A-Za-z0-9]+', '', i)
     out_pdf = ('Meinhard_tmp_%s_%s.pdf' % (runtype, i))
     out_png = ('Meinhard_tmp_%s_%s.png' % (runtype, i))
     print(i)
-    # extracting values (mean) for colors
 
+    # extracting values (mean/mode) for colors
     if i == "Sample_ID": pass
 
-    elif i == "Province" or i == "Ocean":
+    # First categorical values
+    elif i == "Province" or i == "Ocean": # give  here manually the categorical columns!
         plot_labels = labeldf[i]
         numvalcat = list(filtered[i])
         print(filtered[i])
@@ -382,18 +383,16 @@ for i in labels:
         colordict={}
         newv = []
 
-
         for node in nx_graph:
             nodelist=mymapper.node_info_[node]['indices']
             ids = df1.iloc[nodelist,].index.tolist() # full list of stations
             nodesize.append(len(ids))
+            # nodesize has to be normalized for better balanced visualization
             nodesize_norm =  [math.sqrt(x)*25 for x in nodesize]
-            #nodecolor=np.mean(df2.loc[df2.ID.isin(ids),[extractkey]][extractkey].tolist()) # average value for a node
-
+            # Non normalized values for the labels, coloring and barplot
             nodecolor = list(scipy.stats.mode(filtered.loc[filtered.Sample_ID.isin(ids),[extractkey]][extractkey].tolist()))[0]
             color_map.append(nodecolor)
             nom_elements= filtered.loc[filtered.Sample_ID.isin(ids),[extractkey]][extractkey].tolist()
-            ##print(scipy.stats.mode(nom_elements))
 
             newv= []
             for e in nom_elements:
@@ -403,7 +402,6 @@ for i in labels:
 
         # mandatory modification of modelist, because it is an array.
         color_map = np.concatenate(color_map).ravel().tolist()
-        
         vmin=min(color_map)
         vmax=max(color_map)
         modelist=[]
@@ -433,11 +431,9 @@ for i in labels:
         nx.draw_networkx_edges(nx_graph, pos, with_labels=False, node_size=5, node_color=color_map, vmin=vmin, vmax=vmax,cmap=cmap,width=0.25, edge_color="grey")
         
         for node in nx_graph.nodes:
-            #a = plt.pie(extractdict[node],center=pos[node],radius=25,colors=[cmap(a) for a in extractdict[node]])
             c = Counter(colordict[node])
             print(c)
             ratios = [(c[y] / len(colordict[node]) * 100.0) for y in c]
-            #a = plt.pie(ratios,center=pos[node],radius=25, colors=colordict[node], wedgeprops = {'linewidth': 0}) # sorting ids?
             a = plt.pie(ratios,center=pos[node],radius=25, colors=c.keys(), wedgeprops = {'linewidth': 0}) # sorting ids? -> no, because the Counter does it
 
         plt.axis('scaled')
@@ -449,30 +445,24 @@ for i in labels:
         plt.axis('off')
         plt.savefig(("Meinhard_%s_%s_piechart.pdf") % (runtype, i))
 
+    # continous values 
     else:
 
         color_map = []
         nodesize = []
-        #newv = []
 
         for node in nx_graph:
             nodelist=mymapper.node_info_[node]['indices']
             ids = df1.iloc[nodelist,].index.tolist() # full list of stations
             nodesize.append(len(ids))
+            # nodesize has to be normalized for better balanced visualization
             nodesize_norm =  [math.sqrt(x)*25 for x in nodesize]
-            # Non normalized values
-            nodecolor=np.mean(filtered.loc[filtered.Sample_ID.isin(ids),[extractkey]][extractkey].tolist()) # average value for a node
+            # Non normalized values for the labels, coloring and barplot
+            nodecolor=np.mean(filtered.loc[filtered.Sample_ID.isin(ids),[extractkey]][extractkey].tolist())
             color_map.append(nodecolor)
-            #num_elements= df2.loc[df2.ID.isin(ids),[extractkey]][extractkey].tolist()
 
         vmin = min(color_map)
         vmax = max(color_map)
-
-        # If it should be normalized:
-        ##numlist_normalized=[x-min(color_map)/(max(color_map)-float(min(color_map))) for x in color_map]
-        ##numlist_normalized=[0 if math.isnan(x) else x for x in numlist_normalized]
-        ##vmin = min(numlist_normalized)
-        ##vmax = max(numlist_normalized)
 
         numlist=[0 if math.isnan(x) else x for x in color_map]
         nums= np.around(np.linspace(min(color_map), max(color_map), 6),decimals=3)
@@ -483,7 +473,6 @@ for i in labels:
         #color_map = numlist_normalized or color_map
         nx.draw_networkx(nx_graph, pos, with_labels=False, node_size=nodesize_norm, node_color=color_map, vmin=vmin, vmax=vmax, cmap=plt.cm.get_cmap('viridis'), width=0.25, edge_color="grey")
         nodes =nx.draw_networkx_nodes(nx_graph, pos, with_labels=False, node_size=nodesize_norm, node_color=color_map, vmin=vmin, vmax=vmax, cmap=plt.cm.get_cmap('viridis'), width=0.25, edge_color="grey")
-        #sm = plt.cm.ScalarMappable(cmap=plt.cm.get_cmap('viridis'), norm=plt.Normalize(vmin = vmin, vmax=vmax))
         cb=plt.colorbar(nodes,format='%.0e')
         tick_locs = np.linspace(cb.vmin,cb.vmax,6)
         cb.set_ticks(tick_locs)
@@ -492,10 +481,6 @@ for i in labels:
         plt.axis('off')
         plt.savefig(out_pdf)
         plt.savefig(out_png)
-
-        #nx.draw_networkx_labels(nx_graph, pos=pos, font_size=5)
-        #plt.show()
-        #nx.write_gml(nx_graph, 'ga_graph.gexf')
 
 nodetable = None
 endtable = None
@@ -520,9 +505,6 @@ os.system(command)
 
 command = "ffmpeg -pattern_type glob  -i 'Meinhard_tmp_" + runtype + "_*.png' -vf palettegen " + runtype + "_palette.png"
 os.system(command)
-
-#command = "ffmpeg -pattern_type glob -framerate 1 -i 'Meinhard_tmp_" + runtype + "_*.png' -i " + runtype + "_palette.png -lavfi paletteuse -loop 1 " + runtype + "_video.gif"
-#os.system(command)
 
 command = "ffmpeg -pattern_type glob -framerate 1 -i 'Meinhard_tmp_" + runtype + "_*.png' -i " + runtype + "_palette.png -lavfi paletteuse -loop 1 " + runtype + "_video.mp4"
 os.system(command)
@@ -549,6 +531,7 @@ for p in specieslabels:
         ids = df1.iloc[nodelist,].index.tolist() # full list of stations
         values = df1.iloc[nodelist,num2]
         nodesize.append(np.mean(values))
+    # nodesize has to be normalized for better balanced visualization
     nodesize_norm =  [math.sqrt(x)*2500 for x in nodesize]
     # Non normalized values
     color_map = nodesize # modify zeros
@@ -560,13 +543,11 @@ for p in specieslabels:
     plt.figure()
     plt.title(p)
     print(color_map)
-    #color_map = numlist_normalized or color_map
     nx.draw_networkx(nx_graph, pos, with_labels=False, node_size=5,node_color="grey", width=0.25, edge_color="grey") # base
     nx.draw_networkx(nx_graph, pos, with_labels=False, node_size=nodesize_norm,\
      node_color=color_map, vmin=vmin, vmax=vmax, cmap=plt.cm.get_cmap('viridis'), width=0.25, edge_color="grey")
     nodes =nx.draw_networkx_nodes(nx_graph, pos, with_labels=False, node_size=nodesize_norm,\
      node_color=color_map, vmin=vmin, vmax=vmax, cmap=plt.cm.get_cmap('viridis'), width=0.25, edge_color="grey")
-    #sm = plt.cm.ScalarMappable(cmap=plt.cm.get_cmap('viridis'), norm=plt.Normalize(vmin = vmin, vmax=vmax))
     cb=plt.colorbar(nodes,format='%.0e')
     tick_locs = np.linspace(cb.vmin,cb.vmax,6)
     cb.set_ticks(tick_locs)
