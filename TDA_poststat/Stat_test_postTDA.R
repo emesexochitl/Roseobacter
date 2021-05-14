@@ -1,4 +1,4 @@
-# Pst-TDA statistical testing.
+# Post-TDA statistical testing.
 
 # Details:
 # title           :Stat_test_postTDA.R 
@@ -18,7 +18,7 @@ library(tidyverse)
 ### Environmental parameters ###
 rm(list = ls())
 #setwd("/home/emese/Desktop/Roseo_R/Roseobacter_2021/") # <- set home folder
-tmp <- read.csv("Linf_BC_10_04_new_both_species_scaled_filtered_1lens_stations_node_table.txt", sep=",")
+tmp <- read.csv("Linf_BC_10_04_new_both_species_scaled_filtered_1lens_stations_node_table.txt", sep=",") # <- node table from the TDA script
 
 nodelist = c(12,6,15,7) # <- here choose the node, or list of nodes
 looplist = colnames(tmp) # go through all variables
