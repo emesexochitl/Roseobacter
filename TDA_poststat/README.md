@@ -21,6 +21,8 @@ The merger depends on the following R packages:
  * Statistical test is two sided
  
  ## How to use:
+* In command line: Rscript Stat_test_postTDA.R
+* Or the better is to use it in Rstudio
 
 ## Have questions or suggestions?
 Please contact me at emese.szabo@uni-oldenburg.de!
