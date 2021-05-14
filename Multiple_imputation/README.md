@@ -76,3 +76,7 @@ Josse J, Husson F (2016). “missMDA: A Package for Handling Missing Values in M
 https://datasharkie.com/how-to-normalize-data-in-r/
 
 https://www.codecademy.com/articles/normalization
+
+## Have questions or suggestions?
+Please contact me at emese.szabo@uni-oldenburg.de!
+If you experience bugs or errors, please send me your output message of your terminal, optionally the first 10 lines of your files!
