@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#SBATCH --nodes=1
+#SBATCH --ntasks=3
+#SBATCH --mem-per-cpu=80G
+#SBATCH --partition=mpcp.p
+#SBATCH --time=3-0:00
+#SBATCH --output=slurm.%j.out
+#SBATCH --error=slurm.%j.err
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=emese.szabo@uni-oldenburg.de
+
+ml hpc-env/8.3
+ml R-bundle-Bioconductor/3.12-foss-2019b-R-4.0.2
+
+#Rscript functions.community_similarity_update.R
+Rscript prepare.community_similarity_data.R 
