@@ -27,6 +27,22 @@ The merger depends on the following Python packages:
 * at the merging step, it will detect possibly identical columns and ask you if you would still rename and use them in the merge,
 * and finally, it will merge your tables into one final CSV output, based on the columns represented in all your tables,
 * you can choose the name of the output file.
+
+
+## How to use:
+The merger operates on an interactive way. To run it, just type into your terminal:
+
+python data_cleanup_hausfrau.py
+
+First it asks for your files one by one. Next it will ask for defining the range of the headers. For instance, when your header is only the first row, your start coordinate is 0 and your end coordinate is 1. The first 2 rows of headers would be 0 and 2 , the first 3 rows of headers would be 0 and 3  and so forth.  
+Next the fied separator is defined. It can be either a tab, or a comma. After that the basic cleanup comes: when the column names are the exact same in the given data table, one can choose which columns should be dropped. Also, optimal dropping of unnecessary columns are offered.  
+Optimal bacterial growth rate can be calculated, just give the index number of the bacterial generation time (Growth rate (per day) = ln2 / generation time).  
+
+Sometimes columns of different tables are slightly different, making the merging inpossible. For that, this program performs a fuzzy string matching based on  Levenshtein Distance of a given column name and offers the 3 clostest hits. Then one has to determine which one is the actual match.  
+then checks the tables one by one for dupicated and unnecessary rows and offers optional editing. At the end all matching columns will be concatenated to a final table. At the end just for sure the column names are checked again and if the occurennce of a column name is less than the number of input tables, it will be dropped.  
+One can give the name of the merge file and the tables are concatenated and inner merged.
+
+If you are not sure how to use it, please check the testrun.txt file!
 ## Limitations:
  * It is only been tested for Python 2.7
  * Handling categorical data is not solved yet,
@@ -35,13 +51,11 @@ The merger depends on the following Python packages:
  * it can be problematic to merge and manually set the parameters for hundreds of tables, or really noisiy ones. It is recommended to do the merge with subsets, then merge them together,
  * unique columns with no common match in all input tables will be dropped at the end step
  * it takes what it gets. For instance, when a CSV table is exported from Libreoffice, digits can be lost. Before running this merger, make sure you exported your tables right!
- ## How to use:
-The merger operates on an interactive way. To run it, just type into your terminal:
+ 
+## Resources:
 
-python data_cleanup_hausfrau.py
+https://github.com/seatgeek/fuzzywuzzy
 
-First it asks for your files one by one. Next it will ask for defining your headers, then checks the tables one by one for dupicated and unnecessary rows and offers optional editing. At the end all matching columns will be concatenated to a final table.
-If you are not sure how to use it, please check the testrun.txt file!
 ## Have questions or suggestions?
 Please contact me at emese.szabo@uni-oldenburg.de!
 If you experience bugs or errors, please send me your output message of your terminal, optionally the first 10 lines of your files!
