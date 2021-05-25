@@ -7,4 +7,4 @@ To avoid it, one has to follow the next steps:
 3. In the command line,start R or Rstudio and  run the  functions.community_similarity.R:  source(" functions.community_similarity.R", echo=TRUE)
 4. Then edit the  prepare.community_similarity.R script: comment out phyloseq at the beginning, and run the script
 
-Because it needs a lot of resurces, a SLURM script and the modified R scipts are also provided in this folder.
+Because it needs a lot of resurces, a SLURM script and the modified R scripts are also provided in this folder.
