@@ -78,5 +78,5 @@ https://datasharkie.com/how-to-normalize-data-in-r/
 https://www.codecademy.com/articles/normalization
 
 ## Have questions or suggestions?
-Please contact me at emese.szabo@uni-oldenburg.de!
+Please contact me at emese.x.szabo@gmail.com!
 If you experience bugs or errors, please send me your output message of your terminal, optionally the first 10 lines of your files!
