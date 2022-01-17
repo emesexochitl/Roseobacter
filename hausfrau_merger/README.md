@@ -58,5 +58,5 @@ If you are not sure how to use it, please check the testrun.txt file!
 https://github.com/seatgeek/fuzzywuzzy
 
 ## Have questions or suggestions?
-Please contact me at emese.szabo@uni-oldenburg.de!
+Please contact me at emese.x.szabo@gmail.com!
 If you experience bugs or errors, please send me your output message of your terminal, optionally the first 10 lines of your files!
